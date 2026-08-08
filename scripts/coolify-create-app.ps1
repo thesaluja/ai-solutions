@@ -53,9 +53,9 @@ Write-Host "Creating ai-solutions application..." -ForegroundColor Cyan
 # First get the GitHub app environment ID and source ID from existing repos
 Write-Host "Looking up server/environment configuration from existing apps..." -ForegroundColor Cyan
 $existingApps = Invoke-RestMethod -Method Get -Uri "$base/api/v1/applications" -Headers $h
-$erpApp = $existingApps | Where-Object { $_.name -eq 'erpsystem' }
+$erpApp = $existingApps | Where-Object { $_.name -eq 'erp' }
 if (-not $erpApp) {
-    throw "Could not find erpsystem app for reference configuration"
+    throw "Could not find erp app for reference configuration"
 }
 $environmentId = $erpApp.environment_id
 $serverUuid = $erpApp.server_uuid
