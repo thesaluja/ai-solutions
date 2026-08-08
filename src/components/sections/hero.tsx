@@ -1,168 +1,191 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { ArrowDown, Sparkles } from "lucide-react";
-import { NeuralNetwork } from "@/components/three/neural-network";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useReducedMotion } from "@/hooks";
-import { SITE } from "@/lib/constants";
-import { Button } from "@/components/ui";
-import { cn } from "@/lib/utils";
-
-function FloatingCard({
-  text,
-  className,
-  delay = 0,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-}) {
-  return (
-    <motion.div
-      className={cn(
-        "glass rounded-2xl px-4 py-3 text-sm font-medium shadow-lg",
-        "border border-white/10 bg-white/[0.03] backdrop-blur-2xl",
-        className
-      )}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-    >
-      <div className="flex items-center gap-2">
-        <div className="h-2 w-2 rounded-full bg-accent animate-pulse" />
-        <span className="text-white/80">{text}</span>
-      </div>
-    </motion.div>
-  );
-}
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
   const prefersReduced = useReducedMotion();
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const springX = useSpring(mouseX, { stiffness: 100, damping: 30 });
-  const springY = useSpring(mouseY, { stiffness: 100, damping: 30 });
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (prefersReduced) return;
-      mouseX.set((e.clientX / window.innerWidth - 0.5) * 20);
-      mouseY.set((e.clientY / window.innerHeight - 0.5) * 20);
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, [mouseX, mouseY, prefersReduced]);
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Page wipe on load
+    const wipe = document.getElementById("page-wipe-overlay");
+    if (wipe) {
+      gsap.to(wipe, {
+        scaleY: 0,
+        duration: 0.7,
+        ease: "expo.inOut",
+        transformOrigin: "top",
+        onComplete: () => { wipe.style.display = "none"; },
+      });
+    }
+
+    if (prefersReduced) return;
+
+    // Hero tag + sub + actions fade in
+    gsap.from("#hero-tag", { opacity: 0, x: -20, duration: 0.5, ease: "power3.out", delay: 0.4 });
+    gsap.from("#hero-sub", { opacity: 0, y: 20, duration: 0.5, ease: "power3.out", delay: 0.8 });
+    gsap.from("#hero-actions", { opacity: 0, y: 20, duration: 0.5, ease: "power3.out", delay: 1.0 });
+
+    // Text scramble
+    const el = headlineRef.current;
+    if (!el) return;
+    const FINAL = el.getAttribute("data-final") || el.innerText;
+    const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&";
+    const DURATION = 1600;
+    const START = Date.now();
+    const allChars: Array<{ span: HTMLSpanElement; final: string; resolved: boolean }> = [];
+
+    el.innerHTML = "";
+    for (let i = 0; i < FINAL.length; i++) {
+      if (FINAL[i] === "\n") {
+        el.appendChild(document.createElement("br"));
+      } else {
+        const span = document.createElement("span");
+        span.style.display = "inline";
+        span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+        el.appendChild(span);
+        allChars.push({ span, final: FINAL[i], resolved: false });
+      }
+    }
+
+    let raf: number;
+    function tick() {
+      const elapsed = Date.now() - START;
+      const progress = Math.min(elapsed / DURATION, 1);
+      allChars.forEach((c, i) => {
+        const charProgress = i / allChars.length;
+        if (!c.resolved && charProgress <= progress) {
+          c.resolved = true;
+          c.span.textContent = c.final;
+          c.span.style.textShadow = "0 0 24px #00F5FF, 0 0 48px #00F5FF";
+          setTimeout(() => {
+            c.span.style.textShadow = "";
+            c.span.style.transition = "text-shadow 0.6s";
+          }, 80);
+        } else if (!c.resolved) {
+          c.span.textContent = CHARS[Math.floor(Math.random() * CHARS.length)];
+        }
+      });
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    }
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [prefersReduced]);
 
   const scrollToNext = () => {
     document.getElementById("who-we-are")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-    >
-      <NeuralNetwork />
-
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-background/50 to-background z-[5]" />
-
-      <motion.div
-        className="relative z-20 mx-auto max-w-7xl px-6 text-center"
+    <>
+      {/* Page wipe overlay */}
+      <div
+        id="page-wipe-overlay"
         style={{
-          x: prefersReduced ? 0 : springX,
-          y: prefersReduced ? 0 : springY,
+          position: "fixed", inset: 0, background: "#000", zIndex: 9998,
+          transformOrigin: "top", borderBottom: "3px solid #00F5FF",
+          pointerEvents: "none",
         }}
+      />
+
+      <section
+        id="hero"
+        className="relative min-h-screen flex items-center overflow-hidden"
+        style={{ paddingTop: "64px" }}
       >
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-sm text-muted-foreground mb-8 backdrop-blur-sm">
-            <Sparkles className="h-3.5 w-3.5 text-accent" />
-            Enterprise AI Engineering
+        {/* Grid background */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px)
+            `,
+            backgroundSize: "60px 60px",
+          }}
+        />
+
+        {/* Subtle glow orbs */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "20%", left: "60%", width: 400, height: 400,
+            background: "radial-gradient(circle, rgba(191,0,255,0.08) 0%, transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(40px)",
+          }}
+        />
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "50%", left: "10%", width: 300, height: 300,
+            background: "radial-gradient(circle, rgba(0,245,255,0.06) 0%, transparent 70%)",
+            borderRadius: "50%",
+            filter: "blur(40px)",
+          }}
+        />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-6 w-full py-20">
+          {/* Tag */}
+          <div
+            id="hero-tag"
+            className="font-mono text-[0.7rem] text-[#00F5FF] uppercase tracking-[0.2em] mb-6 flex items-center gap-3"
+          >
+            <span className="inline-block w-8 h-[2px] bg-[#00F5FF]" />
+            AI Consulting Studio — Since 2016
           </div>
 
-          <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05]">
-            <span className="block">Intelligence</span>
-            <span className="block text-gradient">that transforms</span>
-            <span className="block">your business</span>
+          {/* Headline - scramble target */}
+          <h1
+            ref={headlineRef}
+            data-final={"WE BUILD AI\nTHAT ACTUALLY\nGLOWS."}
+            className="font-display font-black leading-[0.9] tracking-tight mb-8 text-[#F0F0FF]"
+            style={{ fontSize: "clamp(3.5rem, 9vw, 8.5rem)", whiteSpace: "pre-line" }}
+          >
+            {"WE BUILD AI\nTHAT ACTUALLY\nGLOWS."}
           </h1>
 
-          <p className="mt-8 mx-auto max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed text-balance">
-            {SITE.name} designs and deploys enterprise-grade artificial
-            intelligence systems that automate complex processes, reduce
-            operational costs, and unlock new revenue streams.
+          {/* Sub */}
+          <p
+            id="hero-sub"
+            className="font-sans text-[1.05rem] text-[rgba(240,240,255,0.55)] max-w-[500px] leading-relaxed mb-10"
+          >
+            Production-grade AI systems with the precision of engineering and the boldness of vision.
+            No demos. Just results.
           </p>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button
-              size="xl"
-              onClick={() =>
-                document
-                  .getElementById("contact")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="group relative overflow-hidden"
+          {/* CTAs */}
+          <div id="hero-actions" className="flex flex-wrap gap-4">
+            <button
+              onClick={() => document.getElementById("capabilities")?.scrollIntoView({ behavior: "smooth" })}
+              className="font-mono text-[0.8rem] uppercase tracking-widest text-[#0A0A14] bg-[#00F5FF] border-2 border-[#00F5FF] shadow-[5px_5px_0_#BF00FF] px-8 py-3.5 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#BF00FF] transition-all duration-100 cursor-pointer"
             >
-              <span className="relative z-10">Start a Project</span>
-              <div className="absolute inset-0 bg-accent/20 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-            </Button>
-            <Button
-              size="xl"
-              variant="outline"
-              onClick={() =>
-                document
-                  .getElementById("case-studies")
-                  ?.scrollIntoView({ behavior: "smooth" })
-              }
-              className="border-white/10 hover:border-white/20"
+              Explore Our Work
+            </button>
+            <button
+              onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+              className="font-mono text-[0.8rem] uppercase tracking-widest text-[#BF00FF] bg-transparent border-2 border-[#BF00FF] shadow-[5px_5px_0_#BF00FF] px-8 py-3.5 hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_#00F5FF] hover:border-[#00F5FF] hover:text-[#00F5FF] transition-all duration-100 cursor-pointer"
             >
-              View Case Studies
-            </Button>
+              Start a Project
+            </button>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
 
-      <FloatingCard
-        text="AI Agents Deployed"
-        className="absolute top-[15%] left-[10%] hidden lg:flex"
-        delay={0.8}
-      />
-      <FloatingCard
-        text="Neural Processing"
-        className="absolute top-[20%] right-[12%] hidden lg:flex"
-        delay={1.0}
-      />
-      <FloatingCard
-        text="Enterprise Ready"
-        className="absolute bottom-[25%] left-[18%] hidden lg:flex"
-        delay={1.2}
-      />
-      <FloatingCard
-        text="Real-time Analytics"
-        className="absolute bottom-[30%] right-[15%] hidden lg:flex"
-        delay={1.4}
-      />
-
-      <motion.button
-        onClick={scrollToNext}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-        aria-label="Scroll to explore"
-      >
-        <span className="text-xs tracking-widest uppercase">Explore</span>
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+        {/* Scroll hint */}
+        <button
+          onClick={scrollToNext}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-[rgba(240,240,255,0.4)] hover:text-[#00F5FF] transition-colors"
+          aria-label="Scroll to explore"
         >
-          <ArrowDown className="h-4 w-4" />
-        </motion.div>
-      </motion.button>
-    </section>
+          <span className="font-mono text-[0.6rem] tracking-widest uppercase">Explore</span>
+          <span className="text-lg">↓</span>
+        </button>
+      </section>
+    </>
   );
 }
