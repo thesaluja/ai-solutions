@@ -12,7 +12,7 @@ export function ImplementationProcess() {
 
       <div className="mx-auto max-w-7xl px-6">
         <BlurReveal className="text-center mb-20">
-          <p className="text-sm font-medium text-accent tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium font-mono text-accent tracking-widest uppercase mb-4">
             How We Work
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
@@ -26,7 +26,7 @@ export function ImplementationProcess() {
         </BlurReveal>
 
         <div className="relative">
-          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-accent/20 to-primary/30 md:-translate-x-px" />
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-[#00F5FF]/30 md:-translate-x-px" />
 
           {TIMELINE_STEPS.map((step, i) => (
             <div
@@ -59,11 +59,11 @@ export function ImplementationProcess() {
 
               <div className="relative z-10 flex-shrink-0">
                 <motion.div
-                  className="h-16 w-16 rounded-2xl bg-card border border-white/10 flex items-center justify-center shadow-lg"
+                  className="h-16 w-16 rounded-2xl bg-[rgba(255,255,255,0.04)] backdrop-blur-sm border-2 border-[#00F5FF]/50 shadow-[3px_3px_0_#00F5FF] flex items-center justify-center"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                  <div className="h-3 w-3 rounded-full bg-accent" />
+                  <div className="h-3 w-3 rounded-full bg-[#00F5FF]" />
                 </motion.div>
               </div>
 

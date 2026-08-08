@@ -8,11 +8,9 @@ import { CASE_STUDIES } from "@/lib/constants";
 export function CaseStudies() {
   return (
     <SectionReveal id="case-studies" className="relative py-32 md:py-40">
-      <div className="absolute top-1/2 right-0 w-[600px] h-[600px] bg-accent/3 rounded-full blur-3xl translate-x-1/2" />
-
       <div className="mx-auto max-w-7xl px-6">
         <BlurReveal className="text-center mb-20">
-          <p className="text-sm font-medium text-accent tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium font-mono text-accent tracking-widest uppercase mb-4">
             Case Studies
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
@@ -28,11 +26,11 @@ export function CaseStudies() {
         <div className="space-y-8">
           {CASE_STUDIES.map((study, i) => (
             <FadeIn key={study.title} delay={i * 0.15}>
-              <Card className="group overflow-hidden bg-card/50 border-white/5 hover:border-white/10 transition-all duration-500">
+              <Card className="group overflow-hidden bg-[rgba(255,255,255,0.03)] border-2 border-[rgba(0,245,255,0.35)] shadow-[4px_4px_0_#00F5FF] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#00F5FF] transition-all duration-300">
                 <CardContent className="p-0">
                   <div className="grid md:grid-cols-5">
                     <div className="md:col-span-3 p-8 md:p-10">
-                      <Badge className="mb-4 bg-accent/10 text-accent border-accent/20">
+                      <Badge className="mb-4 border border-[#00F5FF]/40 text-[#00F5FF] bg-transparent font-mono text-xs">
                         {study.industry}
                       </Badge>
                       <h3 className="text-2xl font-semibold text-foreground mb-4">
@@ -62,13 +60,13 @@ export function CaseStudies() {
                             key={result}
                             className="inline-flex items-center gap-1.5 text-xs text-muted-foreground bg-white/5 rounded-full px-3 py-1.5"
                           >
-                            <div className="h-1.5 w-1.5 rounded-full bg-accent" />
+                            <div className="h-1.5 w-1.5 rounded-full bg-[#00F5FF]" />
                             {result}
                           </span>
                         ))}
                       </div>
                     </div>
-                    <div className="md:col-span-2 bg-white/[0.02] p-8 md:p-10 flex flex-col items-center justify-center border-l border-white/5">
+                    <div className="md:col-span-2 bg-white/[0.02] p-8 md:p-10 flex flex-col items-center justify-center border-l border-[#00F5FF]/30">
                       <p className="font-display text-6xl md:text-7xl font-bold text-gradient">
                         {study.metric}
                       </p>
@@ -77,7 +75,7 @@ export function CaseStudies() {
                       </p>
                       <a
                         href={`mailto:hey@aisolutions.in?subject=${encodeURIComponent(`Case study request: ${study.title}`)}`}
-                        className="mt-6 flex items-center gap-2 text-sm text-accent group-hover:underline"
+                        className="mt-6 flex items-center gap-2 text-sm text-[#00F5FF] group-hover:underline"
                       >
                         Request full case study <ArrowUpRight className="h-3.5 w-3.5" />
                       </a>

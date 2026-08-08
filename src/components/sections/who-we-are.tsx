@@ -44,11 +44,10 @@ export function WhoWeAre() {
 
   return (
     <SectionReveal id="who-we-are" className="relative py-32 md:py-40 overflow-hidden">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
       <div className="mx-auto max-w-7xl px-6">
         <BlurReveal className="text-center mb-20">
-          <p className="text-sm font-medium text-accent tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium text-[#00F5FF] font-mono tracking-widest uppercase mb-4">
             Who We Are
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
@@ -83,9 +82,9 @@ export function WhoWeAre() {
         <StaggerChildren className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {principles.map((item) => (
             <StaggerItem key={item.title}>
-              <Card className="group h-full bg-card/50 hover:bg-card/80 transition-colors duration-500 border-white/5 hover:border-white/10">
+              <Card className="group h-full bg-[rgba(255,255,255,0.04)] backdrop-blur-sm border border-[rgba(0,245,255,0.35)] shadow-[4px_4px_0_#00F5FF] hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[6px_6px_0_#00F5FF] hover:border-[#00F5FF] transition-all duration-150">
                 <CardContent className="p-6">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors duration-500">
+                  <div className="h-12 w-12 rounded-xl border border-[#00F5FF]/30 bg-transparent flex items-center justify-center mb-5 group-hover:border-[#00F5FF] group-hover:bg-[rgba(0,245,255,0.04)] transition-all duration-150">
                     <item.icon className="h-6 w-6 text-primary" />
                   </div>
                   <h3 className="font-semibold text-foreground mb-2">

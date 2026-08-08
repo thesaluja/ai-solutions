@@ -31,7 +31,7 @@ export function Testimonials() {
 
       <div className="mx-auto max-w-4xl px-6">
         <BlurReveal className="text-center mb-16">
-          <p className="text-sm font-medium text-accent tracking-widest uppercase mb-4">
+          <p className="text-sm font-medium font-mono text-accent tracking-widest uppercase mb-4">
             Testimonials
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-balance">
@@ -41,9 +41,9 @@ export function Testimonials() {
         </BlurReveal>
 
         <div className="relative">
-          <Card className="border-white/5 bg-card/30 backdrop-blur-sm">
+          <Card className="border-2 border-[rgba(191,0,255,0.4)] bg-[rgba(255,255,255,0.03)] backdrop-blur-sm shadow-[4px_4px_0_#BF00FF]">
             <CardContent className="p-10 md:p-16">
-              <Quote className="h-10 w-10 text-primary/20 mb-6" />
+              <Quote className="h-10 w-10 text-[#00F5FF]/20 mb-6" />
               <div className="relative min-h-[180px]">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -78,7 +78,7 @@ export function Testimonials() {
           <div className="flex items-center justify-center gap-4 mt-8">
             <button
               onClick={prev}
-              className="p-2 rounded-full border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20 transition-all"
+              className="p-2 rounded-full border border-[rgba(0,245,255,0.3)] text-[rgba(240,240,255,0.5)] hover:text-[#00F5FF] hover:border-[#00F5FF] transition-all"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -89,7 +89,7 @@ export function Testimonials() {
                   key={i}
                   onClick={() => setCurrent(i)}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    i === current ? "w-8 bg-accent" : "w-2 bg-white/10 hover:bg-white/20"
+                    i === current ? "w-8 bg-[#00F5FF]" : "w-2 bg-white/10 hover:bg-[#00F5FF]/30"
                   }`}
                   aria-label={`Testimonial ${i + 1}`}
                 />
@@ -97,7 +97,7 @@ export function Testimonials() {
             </div>
             <button
               onClick={next}
-              className="p-2 rounded-full border border-white/10 text-muted-foreground hover:text-foreground hover:border-white/20 transition-all"
+              className="p-2 rounded-full border border-[rgba(0,245,255,0.3)] text-[rgba(240,240,255,0.5)] hover:text-[#00F5FF] hover:border-[#00F5FF] transition-all"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />

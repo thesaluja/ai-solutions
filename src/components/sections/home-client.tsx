@@ -20,10 +20,57 @@ const Hero = dynamic(
   { ssr: false }
 );
 
+function Ticker() {
+  const items = [
+    "AI SOLUTIONS", "×", "ENTERPRISE AI", "×", "DATA INTELLIGENCE", "×",
+    "AUTOMATION", "×", "ML ENGINEERING", "×", "RESULTS", "×",
+    "AI SOLUTIONS", "×", "ENTERPRISE AI", "×", "DATA INTELLIGENCE", "×",
+    "AUTOMATION", "×", "ML ENGINEERING", "×", "RESULTS", "×",
+  ];
+  return (
+    <>
+      <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
+      <div
+        style={{
+          borderTop: "2px solid #BF00FF",
+          borderBottom: "2px solid #BF00FF",
+          background: "rgba(191,0,255,0.04)",
+          overflow: "hidden",
+          padding: "0.7rem 0",
+        }}
+      >
+        <div
+          className="flex w-max"
+          style={{ animation: "marquee 28s linear infinite" }}
+        >
+          {items.map((item, i) => (
+            <span
+              key={i}
+              style={{
+                fontFamily: "var(--font-ibm-plex-mono, monospace)",
+                fontSize: "0.75rem",
+                fontWeight: 500,
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
+                color: "#BF00FF",
+                padding: "0 2.5rem",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
+
 export function HomeClient() {
   return (
     <>
       <Hero />
+      <Ticker />
       <WhoWeAre />
       <Capabilities />
       <AutomationJourney />
