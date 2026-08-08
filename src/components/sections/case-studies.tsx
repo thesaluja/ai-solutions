@@ -75,9 +75,12 @@ export function CaseStudies() {
                       <p className="mt-2 text-sm text-muted-foreground text-center">
                         {study.metricLabel}
                       </p>
-                      <div className="mt-6 flex items-center gap-2 text-sm text-accent group-hover:underline">
-                        Read full case study <ArrowUpRight className="h-3.5 w-3.5" />
-                      </div>
+                      <a
+                        href={`mailto:hey@aisolutions.in?subject=${encodeURIComponent(`Case study request: ${study.title}`)}`}
+                        className="mt-6 flex items-center gap-2 text-sm text-accent group-hover:underline"
+                      >
+                        Request full case study <ArrowUpRight className="h-3.5 w-3.5" />
+                      </a>
                     </div>
                   </div>
                 </CardContent>

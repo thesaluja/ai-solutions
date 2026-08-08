@@ -6,8 +6,7 @@ export const SITE = {
   tagline: "Enterprise AI Solutions & Business Automation",
   description:
     "Ai Solutions designs and deploys enterprise-grade artificial intelligence systems that automate complex business processes, reduce operational costs, and unlock new revenue streams.",
-  email: "hello@aisolutions.in",
-  phone: "+91 98765 43210",
+  email: "hey@aisolutions.in",
   location: "Bangalore, India",
 } as const;
 

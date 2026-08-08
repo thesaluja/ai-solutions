@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Send, CheckCircle, Mail, Phone, MapPin } from "lucide-react";
+import { Send, CheckCircle, Mail, MapPin } from "lucide-react";
 import { SectionReveal, BlurReveal } from "@/components/motion";
 import { Button, Input, Textarea } from "@/components/ui";
 import { SITE } from "@/lib/constants";
@@ -27,14 +27,16 @@ export function Contact() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     reset,
   } = useForm<FormValues>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (_data: FormValues) => {
-    await new Promise((r) => setTimeout(r, 1500));
+  const onSubmit = (data: FormValues) => {
+    const subject = encodeURIComponent(`Project inquiry${data.company ? ` from ${data.company}` : ""}`);
+    const body = encodeURIComponent(`Name: ${data.name}\nCompany: ${data.company ?? "—"}\n\n${data.message}`);
+    window.location.href = `mailto:hey@aisolutions.in?subject=${subject}&body=${body}`;
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -71,15 +73,6 @@ export function Contact() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Email</p>
                   <p className="text-sm text-muted-foreground">{SITE.email}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Phone className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground">Phone</p>
-                  <p className="text-sm text-muted-foreground">{SITE.phone}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -159,23 +152,11 @@ export function Contact() {
                       </p>
                     )}
                   </div>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full group"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <span className="flex items-center gap-2">
-                        <span className="h-4 w-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                        Sending...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        Send Message
-                        <Send className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                      </span>
-                    )}
+                  <Button type="submit" size="lg" className="w-full group">
+                    <span className="flex items-center gap-2">
+                      Send Message
+                      <Send className="h-4 w-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </span>
                   </Button>
                 </form>
               )}

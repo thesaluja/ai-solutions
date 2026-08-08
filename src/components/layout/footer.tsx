@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Copy, Check } from "lucide-react";
+import { ArrowUpRight, Copy, Check, MapPin } from "lucide-react";
 import { useState } from "react";
 import { SITE, NAV_ITEMS } from "@/lib/constants";
 import { Separator } from "@/components/ui";
@@ -26,7 +26,7 @@ export function Footer() {
             <p className="mt-4 text-sm text-muted-foreground max-w-sm leading-relaxed">
               {SITE.description}
             </p>
-            <div className="mt-6 flex flex-col gap-1 text-sm text-muted-foreground">
+            <div className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground">
               <button
                 onClick={() => copyText(SITE.email, "email")}
                 className="flex items-center gap-2 hover:text-foreground transition-colors w-fit"
@@ -38,17 +38,10 @@ export function Footer() {
                   <Copy className="h-3 w-3" />
                 )}
               </button>
-              <button
-                onClick={() => copyText(SITE.phone, "phone")}
-                className="flex items-center gap-2 hover:text-foreground transition-colors w-fit"
-              >
-                {SITE.phone}
-                {copied === "phone" ? (
-                  <Check className="h-3 w-3 text-accent" />
-                ) : (
-                  <Copy className="h-3 w-3" />
-                )}
-              </button>
+              <span className="flex items-center gap-2">
+                <MapPin className="h-3 w-3" />
+                {SITE.location}
+              </span>
             </div>
           </div>
 
