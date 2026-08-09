@@ -3,7 +3,8 @@ FROM node:22-alpine AS base
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json* ./
-RUN npm ci --legacy-peer-deps
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --legacy-peer-deps
 
 FROM base AS builder
 WORKDIR /app
@@ -12,7 +13,8 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ARG SOURCE_COMMIT
 ENV SOURCE_COMMIT=${SOURCE_COMMIT:-unknown}
-RUN npm run build
+RUN --mount=type=cache,target=/app/.next/cache \
+    npm run build
 
 FROM base AS runner
 WORKDIR /app
