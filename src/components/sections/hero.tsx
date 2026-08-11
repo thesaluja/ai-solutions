@@ -75,11 +75,7 @@ export function Hero() {
           initial={{ scaleY: 1 }}
           animate={{ scaleY: 0 }}
           transition={{ duration: 0.7, ease: [0.87, 0, 0.13, 1] }}
-          style={{
-            position: "fixed", inset: 0, background: "#000", zIndex: 9998,
-            transformOrigin: "top", borderBottom: "3px solid #00F5FF",
-            pointerEvents: "none",
-          }}
+          className="fixed inset-0 bg-black z-[9998] origin-top border-b-[3px] border-[#00F5FF] pointer-events-none"
         />
       )}
 
