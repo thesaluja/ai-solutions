@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ai Solutions — Where Intelligence Meets Imagination</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060818;
+  --purple:#7B2FBE;
+  --cobalt:#2563EB;
+  --cyan:#06B6D4;
+  --emerald:#10B981;
+  --amber:#F59E0B;
+  --text:#F0F4FF;
+  --glass:rgba(255,255,255,0.05);
+  --glass-border:rgba(255,255,255,0.10);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;overflow-x:hidden;line-height:1.6}
+a{color:inherit;text-decoration:none}
+
+/* Aurora background */
+.aurora-bg{
+  position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+}
+.aurora-layer{
+  position:absolute;inset:-50%;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, rgba(123,47,190,0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 60%, rgba(6,182,212,0.30) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 70% at 50% 80%, rgba(16,185,129,0.25) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 40% at 30% 70%, rgba(37,99,235,0.28) 0%, transparent 60%),
+    conic-gradient(from 0deg at 60% 40%, rgba(123,47,190,0.15), rgba(6,182,212,0.20), rgba(16,185,129,0.15), rgba(37,99,235,0.18), rgba(245,158,11,0.10), rgba(123,47,190,0.15));
+  animation:auroraShift 14s ease-in-out infinite alternate;
+  filter:blur(40px);
+}
+.aurora-layer2{
+  position:absolute;inset:-50%;
+  background:
+    radial-gradient(ellipse 50% 80% at 70% 20%, rgba(245,158,11,0.15) 0%, transparent 55%),
+    radial-gradient(ellipse 65% 45% at 15% 80%, rgba(6,182,212,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 75% 55% at 85% 75%, rgba(123,47,190,0.25) 0%, transparent 60%);
+  animation:auroraShift2 10s ease-in-out infinite alternate;
+  filter:blur(50px);
+}
+@keyframes auroraShift{
+  0%{transform:translate(0,0) rotate(0deg) scale(1)}
+  33%{transform:translate(-4%,3%) rotate(3deg) scale(1.05)}
+  66%{transform:translate(3%,-2%) rotate(-2deg) scale(0.97)}
+  100%{transform:translate(-2%,4%) rotate(4deg) scale(1.03)}
+}
+@keyframes auroraShift2{
+  0%{transform:translate(0,0) rotate(0deg)}
+  50%{transform:translate(5%,-4%) rotate(-5deg) scale(1.08)}
+  100%{transform:translate(-3%,5%) rotate(6deg) scale(0.95)}
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1.2rem 4rem;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.4s ease,backdrop-filter 0.4s ease,border-bottom 0.4s ease;
+}
+nav.scrolled{
+  background:rgba(6,8,24,0.75);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--glass-border);
+}
+.nav-logo{
+  font-family:'Lora',serif;font-size:1.4rem;font-weight:700;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.02em;
+}
+.nav-links{display:flex;gap:2.5rem;align-items:center}
+.nav-links a{
+  font-size:0.875rem;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;
+  opacity:0.7;transition:opacity 0.2s,text-shadow 0.2s;
+}
+.nav-links a:hover{opacity:1;text-shadow:0 0 20px rgba(6,182,212,0.8)}
+.nav-cta{
+  padding:0.55rem 1.4rem;border-radius:50px;font-size:0.875rem;font-weight:600;
+  background:linear-gradient(135deg,var(--purple),var(--cobalt));
+  border:1px solid rgba(123,47,190,0.5);
+  transition:transform 0.2s,box-shadow 0.2s;
+  cursor:pointer;
+}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 0 30px rgba(123,47,190,0.5)}
+
+/* HERO */
+#hero{
+  position:relative;z-index:1;min-height:100vh;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  text-align:center;padding:6rem 2rem 4rem;overflow:hidden;
+}
+.orb{
+  position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;
+}
+.orb-1{width:400px;height:400px;background:rgba(123,47,190,0.25);top:10%;left:-5%}
+.orb-2{width:300px;height:300px;background:rgba(6,182,212,0.20);top:60%;right:-3%}
+.orb-3{width:250px;height:250px;background:rgba(16,185,129,0.18);bottom:15%;left:30%}
+.orb-4{width:200px;height:200px;background:rgba(245,158,11,0.15);top:20%;right:20%}
+.hero-eyebrow{
+  font-size:0.8rem;letter-spacing:0.25em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1.5rem;opacity:0;
+}
+.hero-headline{
+  font-family:'Lora',serif;font-size:clamp(2.8rem,7vw,6rem);font-weight:700;
+  line-height:1.1;max-width:900px;margin-bottom:1.5rem;
+}
+.hero-headline .word{
+  display:inline-block;margin-right:0.2em;opacity:0;transform:translateY(60px);
+}
+.hero-gradient-text{
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 40%,var(--amber) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.15rem;font-weight:300;max-width:580px;opacity:0;color:rgba(240,244,255,0.75);
+  margin-bottom:2.5rem;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0}
+.btn-primary{
+  padding:0.85rem 2.2rem;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;
+  background:linear-gradient(135deg,var(--purple),var(--cyan));
+  border:none;color:#fff;transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(6,182,212,0.45)}
+.btn-outline{
+  padding:0.85rem 2.2rem;border-radius:50px;font-size:1rem;font-weight:500;cursor:pointer;
+  background:transparent;border:1px solid var(--glass-border);color:var(--text);
+  transition:border-color 0.2s,background 0.2s;
+}
+.btn-outline:hover{border-color:var(--cyan);background:rgba(6,182,212,0.08)}
+.scroll-hint{margin-top:4rem;opacity:0.4;animation:bounce 2s ease-in-out infinite}
+.scroll-hint svg{width:24px;height:24px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* Sections shared */
+section{position:relative;z-index:1}
+.section-label{
+  font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:1rem;
+}
+.section-title{
+  font-family:'Lora',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;
+  line-height:1.2;margin-bottom:1rem;
+}
+
+/* VALUE PROPS */
+#values{padding:6rem 2rem}
+.values-inner{max-width:1100px;margin:0 auto}
+.values-header{text-align:center;margin-bottom:4rem}
+.values-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.value-card{
+  background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;
+  padding:2rem;backdrop-filter:blur(10px);
+  transition:transform 0.3s,border-color 0.3s;
+}
+.value-card:hover{transform:translateY(-4px);border-color:rgba(6,182,212,0.3)}
+.value-icon{width:52px;height:52px;margin-bottom:1.2rem}
+.value-card h3{font-family:'Lora',serif;font-size:1.3rem;margin-bottom:0.6rem}
+.value-card p{font-size:0.9rem;opacity:0.7;line-height:1.7}
+
+/* SERVICES */
+#services{padding:6rem 2rem}
+.services-inner{max-width:1100px;margin:0 auto}
+.services-header{text-align:center;margin-bottom:4rem}
+.service-row{
+  display:flex;align-items:flex-start;gap:2rem;padding:2.5rem;
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:20px;margin-bottom:1.5rem;backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+.service-row:nth-child(odd){border-left:3px solid var(--cyan)}
+.service-row:nth-child(even){border-left:3px solid var(--purple)}
+.service-icon-wrap{
+  width:64px;height:64px;min-width:64px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+}
+.service-row:nth-child(1) .service-icon-wrap{background:rgba(37,99,235,0.15)}
+.service-row:nth-child(2) .service-icon-wrap{background:rgba(123,47,190,0.15)}
+.service-row:nth-child(3) .service-icon-wrap{background:rgba(6,182,212,0.15)}
+.service-row:nth-child(4) .service-icon-wrap{background:rgba(16,185,129,0.15)}
+.service-icon-wrap svg{width:32px;height:32px}
+.service-content h3{font-family:'Lora',serif;font-size:1.25rem;margin-bottom:0.5rem}
+.service-content p{font-size:0.9rem;opacity:0.7;line-height:1.7}
+.service-tag{
+  display:inline-block;margin-top:0.8rem;padding:0.3rem 0.9rem;
+  border-radius:50px;font-size:0.75rem;font-weight:600;letter-spacing:0.05em;
+  background:rgba(6,182,212,0.12);border:1px solid rgba(6,182,212,0.25);color:var(--cyan);
+}
+
+/* PROCESS */
+#process{padding:6rem 2rem}
+.process-inner{max-width:800px;margin:0 auto}
+.process-header{text-align:center;margin-bottom:4rem}
+.timeline{position:relative;padding-left:3rem}
+.timeline-line{
+  position:absolute;left:16px;top:0;bottom:0;width:2px;
+  background:linear-gradient(to bottom,var(--cyan),var(--purple),var(--emerald));
+  transform-origin:top;
+}
+.timeline-step{position:relative;margin-bottom:3rem;padding-left:1rem}
+.timeline-dot{
+  position:absolute;left:-2.4rem;top:0.3rem;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--cyan);border:2px solid var(--bg);
+  box-shadow:0 0 15px rgba(6,182,212,0.6);
+}
+.timeline-step:nth-child(2) .timeline-dot{background:var(--purple);box-shadow:0 0 15px rgba(123,47,190,0.6)}
+.timeline-step:nth-child(3) .timeline-dot{background:var(--emerald);box-shadow:0 0 15px rgba(16,185,129,0.6)}
+.timeline-step:nth-child(4) .timeline-dot{background:var(--amber);box-shadow:0 0 15px rgba(245,158,11,0.6)}
+.timeline-step h3{font-family:'Lora',serif;font-size:1.2rem;margin-bottom:0.4rem}
+.timeline-step p{font-size:0.9rem;opacity:0.7;line-height:1.7}
+.step-num{font-size:0.75rem;color:var(--cyan);letter-spacing:0.15em;margin-bottom:0.3rem}
+
+/* TESTIMONIALS */
+#testimonials{padding:6rem 2rem}
+.testimonials-inner{max-width:1100px;margin:0 auto}
+.testimonials-header{text-align:center;margin-bottom:4rem}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.tcard{
+  background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:20px;padding:2rem;backdrop-filter:blur(10px);
+  position:relative;overflow:hidden;
+}
+.tcard::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+}
+.tcard:nth-child(1)::before{background:linear-gradient(90deg,var(--cyan),var(--cobalt))}
+.tcard:nth-child(2)::before{background:linear-gradient(90deg,var(--purple),var(--cyan))}
+.tcard:nth-child(3)::before{background:linear-gradient(90deg,var(--emerald),var(--cyan))}
+.stars{color:var(--amber);font-size:1rem;margin-bottom:1rem;letter-spacing:2px}
+.tcard blockquote{font-size:0.95rem;opacity:0.85;line-height:1.7;margin-bottom:1.5rem;font-style:italic}
+.tcard-author{display:flex;align-items:center;gap:0.8rem}
+.avatar{
+  width:42px;height:42px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:0.9rem;flex-shrink:0;
+}
+.tcard:nth-child(1) .avatar{background:linear-gradient(135deg,var(--cyan),var(--cobalt))}
+.tcard:nth-child(2) .avatar{background:linear-gradient(135deg,var(--purple),var(--cobalt))}
+.tcard:nth-child(3) .avatar{background:linear-gradient(135deg,var(--emerald),var(--cyan))}
+.author-name{font-weight:600;font-size:0.9rem}
+.author-role{font-size:0.8rem;opacity:0.6}
+
+/* STATS */
+#stats{padding:6rem 2rem}
+.stats-inner{max-width:1100px;margin:0 auto;text-align:center}
+.stats-header{margin-bottom:4rem}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1.5rem}
+.stat-bubble{
+  position:relative;padding:3rem 1.5rem;border-radius:50%;
+  width:200px;height:200px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:1px solid var(--glass-border);
+  background:var(--glass);backdrop-filter:blur(10px);
+  overflow:hidden;
+}
+.stat-bubble::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  opacity:0.15;
+}
+.stat-bubble:nth-child(1)::before{background:radial-gradient(circle,var(--cobalt),transparent)}
+.stat-bubble:nth-child(2)::before{background:radial-gradient(circle,var(--purple),transparent)}
+.stat-bubble:nth-child(3)::before{background:radial-gradient(circle,var(--cyan),transparent)}
+.stat-bubble:nth-child(4)::before{background:radial-gradient(circle,var(--emerald),transparent)}
+.stat-number{
+  font-family:'Lora',serif;font-size:2.5rem;font-weight:700;line-height:1;
+  background:linear-gradient(135deg,#fff,rgba(240,244,255,0.7));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.stat-label{font-size:0.8rem;opacity:0.6;margin-top:0.4rem;letter-spacing:0.05em}
+
+/* CTA */
+#cta{
+  padding:8rem 2rem;position:relative;overflow:hidden;
+}
+.cta-aurora{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(135deg,rgba(123,47,190,0.4) 0%,rgba(37,99,235,0.35) 30%,rgba(6,182,212,0.3) 60%,rgba(16,185,129,0.25) 100%);
+  animation:ctaSweep 6s ease-in-out infinite alternate;
+}
+@keyframes ctaSweep{
+  0%{background-position:0% 50%}
+  100%{background-position:100% 50%}
+}
+.cta-glow{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(6,182,212,0.15),transparent);
+  animation:ctaGlow 4s ease-in-out infinite alternate;
+}
+@keyframes ctaGlow{0%{opacity:0.5}100%{opacity:1}}
+.cta-content{
+  position:relative;z-index:1;text-align:center;max-width:700px;margin:0 auto;
+}
+.cta-content .section-label{color:rgba(240,244,255,0.7)}
+.cta-content .section-title{font-size:clamp(2rem,5vw,3.5rem);margin-bottom:1rem}
+.cta-content p{opacity:0.8;margin-bottom:2.5rem;font-size:1.05rem}
+.cta-btn{
+  padding:1rem 3rem;border-radius:50px;font-size:1.1rem;font-weight:700;cursor:pointer;
+  background:#fff;color:#060818;border:none;
+  transition:transform 0.2s,box-shadow 0.2s;display:inline-block;
+}
+.cta-btn:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+
+/* FOOTER */
+footer{
+  background:rgba(4,5,15,0.95);border-top:1px solid var(--glass-border);
+  padding:3rem 4rem 2rem;position:relative;z-index:1;
+}
+.footer-inner{
+  max-width:1100px;margin:0 auto;
+  display:flex;align-items:flex-start;justify-content:space-between;
+  flex-wrap:wrap;gap:2rem;
+}
+.footer-brand .nav-logo{font-size:1.3rem}
+.footer-brand p{font-size:0.85rem;opacity:0.5;margin-top:0.6rem;max-width:250px;line-height:1.6}
+.footer-links h4{font-size:0.75rem;letter-spacing:0.2em;text-transform:uppercase;opacity:0.5;margin-bottom:1rem}
+.footer-links ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem}
+.footer-links a{font-size:0.875rem;opacity:0.6;transition:opacity 0.2s,color 0.2s}
+.footer-links a:hover{opacity:1;color:var(--cyan)}
+.footer-bottom{
+  max-width:1100px;margin:2rem auto 0;
+  padding-top:1.5rem;border-top:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+.footer-bottom p{font-size:0.8rem;opacity:0.4}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  .service-row{flex-direction:column}
+  footer{padding:3rem 1.5rem 2rem}
+  .stat-bubble{width:160px;height:160px}
+  .stat-number{font-size:1.8rem}
+}
+
+/* UTILS */
+.container{max-width:1100px;margin:0 auto}
+</style>
+</head>
+<body>
+
+<!-- Aurora fixed background -->
+<div class="aurora-bg">
+  <div class="aurora-layer"></div>
+  <div class="aurora-layer2"></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">Ai Solutions</div>
+  <div class="nav-links">
+    <a href="#values">Capabilities</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#testimonials">Clients</a>
+    <a href="#cta" class="nav-cta">Get Started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="orb orb-4"></div>
+
+  <p class="hero-eyebrow">AI Consulting &amp; Engineering</p>
+
+  <h1 class="hero-headline">
+    <span class="word">Where</span>
+    <span class="word">Intelligence</span>
+    <span class="word hero-gradient-text">Meets</span>
+    <span class="word hero-gradient-text">Imagination</span>
+  </h1>
+
+  <p class="hero-sub">We craft AI experiences that feel like magic - built on rigorous engineering, designed for human impact.</p>
+
+  <div class="hero-btns">
+    <a href="#cta" class="btn-primary">Start Your Transformation</a>
+    <a href="#services" class="btn-outline">Explore Services</a>
+  </div>
+
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</section>
+
+<!-- VALUE PROPS -->
+<section id="values">
+  <div class="values-inner">
+    <div class="values-header">
+      <p class="section-label">Why Ai Solutions</p>
+      <h2 class="section-title">Engineered for <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Impact</span></h2>
+    </div>
+    <div class="values-grid">
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 52 52" fill="none">
+          <defs>
+            <linearGradient id="vg1" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563EB"/><stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <circle cx="26" cy="26" r="22" stroke="url(#vg1)" stroke-width="2" fill="rgba(37,99,235,0.1)"/>
+          <path d="M18 26l5 5 11-11" stroke="url(#vg1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3>Proven Outcomes</h3>
+        <p>Every engagement is anchored in measurable business results. We define success metrics upfront and deliver against them, consistently.</p>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 52 52" fill="none">
+          <defs>
+            <linearGradient id="vg2" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <circle cx="26" cy="26" r="22" stroke="url(#vg2)" stroke-width="2" fill="rgba(123,47,190,0.1)"/>
+          <path d="M26 15v4M26 33v4M15 26h4M33 26h4" stroke="url(#vg2)" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="26" cy="26" r="5" stroke="url(#vg2)" stroke-width="2"/>
+        </svg>
+        <h3>End-to-End Mastery</h3>
+        <p>From strategy to deployment, we own the full AI lifecycle - no handoff friction, no integration gaps. One team, full accountability.</p>
+      </div>
+      <div class="value-card">
+        <svg class="value-icon" viewBox="0 0 52 52" fill="none">
+          <defs>
+            <linearGradient id="vg3" x1="0" y1="0" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#10B981"/><stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <circle cx="26" cy="26" r="22" stroke="url(#vg3)" stroke-width="2" fill="rgba(16,185,129,0.1)"/>
+          <path d="M19 33l-3-8 6-2 4-8 4 8 6 2-3 8H19z" stroke="url(#vg3)" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <h3>Human-Centered AI</h3>
+        <p>Technology in service of people. Every system we build amplifies human capability while remaining transparent, fair, and trustworthy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <p class="section-label">What We Do</p>
+      <h2 class="section-title">Our <span style="background:linear-gradient(135deg,var(--purple),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Services</span></h2>
+    </div>
+
+    <div class="service-row">
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M6 16h5M16 6v5M21 16h5M16 21v5" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="16" cy="16" r="4" fill="rgba(37,99,235,0.3)" stroke="#2563EB" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h3>Strategic AI Advisory</h3>
+        <p>Executive-level guidance for AI transformation. We map your opportunity landscape, prioritize high-ROI use cases, and build a pragmatic roadmap that aligns with your business goals and capabilities.</p>
+        <span class="service-tag">Strategy</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 32 32" fill="none">
+          <rect x="6" y="6" width="8" height="8" rx="2" stroke="#7B2FBE" stroke-width="2"/>
+          <rect x="18" y="6" width="8" height="8" rx="2" stroke="#7B2FBE" stroke-width="2"/>
+          <rect x="6" y="18" width="8" height="8" rx="2" stroke="#7B2FBE" stroke-width="2"/>
+          <rect x="18" y="18" width="8" height="8" rx="2" stroke="#7B2FBE" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h3>Intelligent Systems Engineering</h3>
+        <p>We design, build, and deploy production-grade AI systems - LLM applications, computer vision pipelines, recommendation engines - engineered for reliability, scale, and longevity.</p>
+        <span class="service-tag" style="color:var(--purple);background:rgba(123,47,190,0.12);border-color:rgba(123,47,190,0.25)">Engineering</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 32 32" fill="none">
+          <polyline points="4,22 10,14 16,18 22,8 28,12" stroke="#06B6D4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="4" y1="26" x2="28" y2="26" stroke="#06B6D4" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h3>Data &amp; Analytics Platforms</h3>
+        <p>Transform raw data into competitive advantage. We architect modern data platforms with AI-native analytics layers - real-time insights, predictive models, and intelligent dashboards your teams will actually use.</p>
+        <span class="service-tag">Analytics</span>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 32 32" fill="none">
+          <path d="M8 12h16M8 20h10" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M24 22l4-2-4-2" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="4" y="6" width="24" height="20" rx="4" stroke="#10B981" stroke-width="2"/>
+        </svg>
+      </div>
+      <div class="service-content">
+        <h3>AI-Powered Automation</h3>
+        <p>Eliminate repetitive bottlenecks with intelligent process automation. From document processing to multi-step agentic workflows, we automate the work that drains your team's focus and energy.</p>
+        <span class="service-tag" style="color:var(--emerald);background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.25)">Automation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner">
+    <div class="process-header">
+      <p class="section-label">How We Work</p>
+      <h2 class="section-title">Our <span style="background:linear-gradient(135deg,var(--cyan),var(--emerald));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Process</span></h2>
+      <p style="opacity:0.65;margin-top:0.5rem">A clear path from vision to value</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-line"></div>
+
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <p class="step-num">01</p>
+        <h3>Discover &amp; Diagnose</h3>
+        <p>We dive deep into your business context - understanding goals, constraints, data landscape, and team capabilities before proposing anything.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <p class="step-num">02</p>
+        <h3>Design &amp; Prioritize</h3>
+        <p>We map use cases to impact, define architecture, and build a sequenced roadmap with clear milestones and success criteria.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <p class="step-num">03</p>
+        <h3>Build &amp; Validate</h3>
+        <p>Rapid iteration with continuous validation. We ship working prototypes fast, gather feedback, and harden into production systems.</p>
+      </div>
+
+      <div class="timeline-step">
+        <div class="timeline-dot"></div>
+        <p class="step-num">04</p>
+        <h3>Deploy &amp; Evolve</h3>
+        <p>Launch with confidence. Post-deployment, we monitor performance, retrain models as data drifts, and evolve the system alongside your business.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="testimonials-header">
+      <p class="section-label">Client Stories</p>
+      <h2 class="section-title">Results That <span style="background:linear-gradient(135deg,var(--amber),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Speak</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Ai Solutions transformed how we operate. Their team understood our industry before we had to explain it, and delivered a system that's now central to everything we do."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">SC</div>
+          <div>
+            <div class="author-name">Sarah Chen</div>
+            <div class="author-role">CEO, TechCorp</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Best AI partner we've worked with. They pushed back when we were wrong, moved fast when it mattered, and produced work we're genuinely proud of."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">MR</div>
+          <div>
+            <div class="author-name">Marcus Reid</div>
+            <div class="author-role">CTO, FinanceHub</div>
+          </div>
+        </div>
+      </div>
+      <div class="tcard">
+        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <blockquote>"Production-ready in 6 weeks - I didn't believe it was possible. They delivered exactly what was promised, on time, and it's been running flawlessly ever since."</blockquote>
+        <div class="tcard-author">
+          <div class="avatar">AK</div>
+          <div>
+            <div class="author-name">Anika Kapoor</div>
+            <div class="author-role">VP Data, RetailCo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-inner">
+    <div class="stats-header">
+      <p class="section-label">By the Numbers</p>
+      <h2 class="section-title">A Track Record of <span style="background:linear-gradient(135deg,var(--cobalt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Excellence</span></h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-bubble">
+        <div class="stat-number">200+</div>
+        <div class="stat-label">Projects Delivered</div>
+      </div>
+      <div class="stat-bubble">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Clients Served</div>
+      </div>
+      <div class="stat-bubble">
+        <div class="stat-number">8+</div>
+        <div class="stat-label">Years of Expertise</div>
+      </div>
+      <div class="stat-bubble">
+        <div class="stat-number">99%</div>
+        <div class="stat-label">Client Retention</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-aurora"></div>
+  <div class="cta-glow"></div>
+  <div class="cta-content">
+    <p class="section-label">Ready to begin?</p>
+    <h2 class="section-title">Start Your Transformation</h2>
+    <p>Let's explore what's possible for your organization. A 30-minute conversation is all it takes to map your highest-impact AI opportunity.</p>
+    <a href="https://aisolutions.in" class="cta-btn">Book a Discovery Call</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">Ai Solutions</div>
+      <p>Where Intelligence Meets Imagination. Building AI that matters.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Strategic AI Advisory</a></li>
+        <li><a href="#services">Intelligent Systems</a></li>
+        <li><a href="#services">Data Platforms</a></li>
+        <li><a href="#services">AI Automation</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#process">Our Process</a></li>
+        <li><a href="#testimonials">Client Stories</a></li>
+        <li><a href="#values">Why Us</a></li>
+        <li><a href="#cta">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="https://aisolutions.in">aisolutions.in</a></li>
+        <li><a href="mailto:hello@aisolutions.in">hello@aisolutions.in</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>2024 Ai Solutions. All rights reserved.</p>
+    <p style="color:var(--cyan);opacity:0.5">aisolutions.in</p>
+  </div>
+</footer>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// Nav scroll
+const nav = document.getElementById('main-nav');
+ScrollTrigger.create({
+  start:'top -60',
+  onToggle:({isActive})=>nav.classList.toggle('scrolled',isActive)
+});
+
+// Hero reveals
+const tl = gsap.timeline({delay:0.3});
+tl.to('.hero-eyebrow',{opacity:1,y:0,duration:0.6,ease:'power3.out'})
+  .to('.hero-headline .word',{
+    opacity:1,y:0,duration:0.9,stagger:0.1,ease:'power3.out'
+  },'-=0.2')
+  .to('.hero-sub',{opacity:1,y:0,duration:0.7,ease:'power3.out'},'-=0.3')
+  .to('.hero-btns',{opacity:1,y:0,duration:0.6,ease:'power3.out'},'-=0.2');
+
+// Floating orbs
+gsap.utils.toArray('.orb').forEach((orb,i)=>{
+  gsap.to(orb,{
+    y:'random(-30,30)',x:'random(-20,20)',
+    duration:'random(4,8)',repeat:-1,yoyo:true,ease:'sine.inOut',
+    delay:i*0.8
+  });
+});
+
+// Orb parallax on scroll
+gsap.utils.toArray('.orb').forEach((orb,i)=>{
+  gsap.to(orb,{
+    y:(i%2===0?-80:80),
+    ease:'none',
+    scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:1.5}
+  });
+});
+
+// Value cards fade in
+gsap.from('.value-card',{
+  opacity:0,y:40,duration:0.7,stagger:0.15,ease:'power2.out',
+  scrollTrigger:{trigger:'#values',start:'top 75%'}
+});
+
+// Services alternating slide
+document.querySelectorAll('.service-row').forEach((row,i)=>{
+  gsap.from(row,{
+    opacity:0,x:i%2===0?-60:60,duration:0.8,ease:'power2.out',
+    scrollTrigger:{trigger:row,start:'top 80%'}
+  });
+});
+
+// Timeline line draw
+gsap.from('.timeline-line',{
+  scaleY:0,transformOrigin:'top center',ease:'none',
+  scrollTrigger:{trigger:'.timeline',start:'top 70%',end:'bottom 60%',scrub:1}
+});
+
+// Timeline steps
+gsap.utils.toArray('.timeline-step').forEach((step,i)=>{
+  gsap.from(step,{
+    opacity:0,x:-30,duration:0.6,ease:'power2.out',
+    scrollTrigger:{trigger:step,start:'top 82%',delay:i*0.1}
+  });
+});
+
+// Testimonials
+gsap.from('.tcard',{
+  opacity:0,scale:0.9,duration:0.6,stagger:0.15,ease:'power2.out',
+  scrollTrigger:{trigger:'#testimonials',start:'top 75%'}
+});
+
+// Stats bubbles with spring
+gsap.from('.stat-bubble',{
+  opacity:0,scale:0,duration:0.7,stagger:0.12,ease:'back.out(1.7)',
+  scrollTrigger:{trigger:'#stats',start:'top 75%'}
+});
+
+// CTA gradient sweep
+gsap.from('.cta-aurora',{
+  xPercent:-100,duration:1.2,ease:'power3.out',
+  scrollTrigger:{trigger:'#cta',start:'top 80%'}
+});
+gsap.from('.cta-content',{
+  opacity:0,y:40,duration:0.8,ease:'power3.out',
+  scrollTrigger:{trigger:'#cta',start:'top 75%'}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ai Solutions - We Build AI That Actually Works.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F2F0EB;
+  --ink: #0A0A0A;
+  --red: #FF3B00;
+  --border: 3px solid #0A0A0A;
+  --shadow: 4px 4px 0 #0A0A0A;
+  --shadow-lg: 8px 8px 0 #0A0A0A;
+  --font-head: 'Space Grotesk', sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-body: 'Inter', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* PAGE LOAD WIPE */
+#page-wipe {
+  position: fixed;
+  inset: 0;
+  background: #0A0A0A;
+  z-index: 9999;
+  transform-origin: top;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: #0A0A0A;
+  border-bottom: var(--border);
+  padding: 0 2rem;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.nav-links a {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transition: color 0.15s;
+}
+
+.nav-links a:hover { color: #fff; }
+
+.nav-cta {
+  background: var(--red);
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.nav-cta:hover { background: #e63500; }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  padding-top: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(10,10,10,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,10,10,0.06) 1px, transparent 1px);
+  background-size: 80px 80px;
+  pointer-events: none;
+}
+
+.hero-inner {
+  padding: 4rem 2.5rem 3rem;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--red);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.hero-label::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+}
+
+.hero-headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 11vw, 12rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+  margin-bottom: 0.2em;
+}
+
+.hero-headline .line-2 {
+  color: var(--ink);
+  position: relative;
+  display: inline-block;
+}
+
+.hero-headline .line-2::after {
+  content: '';
+  position: absolute;
+  bottom: 0.04em;
+  left: 0;
+  right: 0;
+  height: 0.1em;
+  background: var(--red);
+  z-index: -1;
+}
+
+.hero-headline .accent { color: var(--red); }
+
+.hero-bottom {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-top: 3rem;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero-sub {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: rgba(10,10,10,0.6);
+  max-width: 480px;
+}
+
+.hero-sub strong { color: var(--ink); }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: #fff;
+  border: var(--border);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ink);
+  border: var(--border);
+  padding: 0.875rem 2rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary:hover { background: var(--ink); color: #fff; }
+
+.hero-scroll-hint {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(10,10,10,0.4);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  writing-mode: vertical-rl;
+}
+
+/* TICKER */
+.ticker-belt {
+  background: var(--ink);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding: 1rem 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-track {
+  display: inline-block;
+  animation: ticker 28s linear infinite;
+}
+
+.ticker-inner {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  padding-right: 4rem;
+}
+
+.ticker-inner .dot { color: var(--red); margin: 0 1rem; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* SERVICES */
+#services {
+  padding: 6rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  border-bottom: var(--border);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(10,10,10,0.5);
+}
+
+.section-title {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  border: var(--border);
+  padding: 2rem;
+  background: var(--bg);
+  box-shadow: var(--shadow);
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  cursor: default;
+}
+
+.service-card:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--red);
+}
+
+.service-num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: rgba(10,10,10,0.4);
+  letter-spacing: 0.1em;
+  margin-bottom: 1.5rem;
+}
+
+.service-icon {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  line-height: 1;
+}
+
+.service-name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.75rem;
+}
+
+.service-desc {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: rgba(10,10,10,0.65);
+}
+
+.service-tag {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--ink);
+  color: #fff;
+  padding: 0.25rem 0.6rem;
+}
+
+/* NUMBERS */
+#impact {
+  background: var(--ink);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding: 5rem 2.5rem;
+  overflow: hidden;
+}
+
+.impact-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.impact-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 3rem;
+}
+
+.numbers-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
+  gap: 0;
+  border-left: 1px solid rgba(255,255,255,0.1);
+}
+
+@media (max-width: 768px) {
+  .numbers-grid { grid-template-columns: 1fr 1fr; }
+}
+
+.number-item {
+  padding: 2rem 2.5rem;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+}
+
+.number-val {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(3.5rem, 7vw, 8rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: #fff;
+  display: flex;
+  align-items: flex-start;
+}
+
+.number-val .suffix {
+  font-size: 0.5em;
+  margin-top: 0.2em;
+  color: var(--red);
+}
+
+.number-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+  margin-top: 0.75rem;
+}
+
+/* WORK GRID */
+#work {
+  padding: 6rem 2.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .work-grid { grid-template-columns: 1fr; }
+}
+
+.work-card {
+  border: var(--border);
+  padding: 2.5rem;
+  box-shadow: var(--shadow);
+  background: var(--bg);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  cursor: default;
+  overflow: hidden;
+  position: relative;
+}
+
+.work-card:hover {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: var(--shadow-lg);
+}
+
+.work-card:hover .work-cat,
+.work-card:hover .work-desc { color: rgba(255,255,255,0.6); }
+
+.work-card:hover .work-tag { background: #fff; color: var(--ink); }
+
+.work-card--large { grid-row: span 2; display: flex; flex-direction: column; justify-content: flex-end; min-height: 320px; }
+
+.work-cat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(10,10,10,0.45);
+  margin-bottom: 1rem;
+  transition: color 0.2s;
+}
+
+.work-name {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.work-desc {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: rgba(10,10,10,0.6);
+  transition: color 0.2s;
+  margin-bottom: 1.5rem;
+}
+
+.work-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border: 2px solid currentColor;
+  padding: 0.2rem 0.55rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.work-arrow {
+  position: absolute;
+  bottom: 2.5rem; right: 2.5rem;
+  font-size: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.work-card:hover .work-arrow { opacity: 1; }
+
+/* ABOUT STRIP */
+#about {
+  background: var(--ink);
+  border-top: var(--border);
+  border-bottom: var(--border);
+  padding: 5rem 2.5rem;
+}
+
+.about-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.about-headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2rem, 5.5vw, 5.5rem);
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 2.5rem;
+}
+
+.about-headline .red { color: var(--red); }
+
+.about-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) { .about-body { grid-template-columns: 1fr; } }
+
+.about-para {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  border-left: 3px solid var(--red);
+  padding-left: 1.5rem;
+}
+
+.about-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.about-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.about-stat strong {
+  color: #fff;
+  font-size: 1rem;
+  font-family: var(--font-head);
+  font-weight: 700;
+}
+
+/* CTA */
+#cta {
+  background: var(--red);
+  border-bottom: var(--border);
+  padding: 6rem 2.5rem;
+}
+
+.cta-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.cta-headline {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(2.5rem, 7vw, 7rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--ink);
+}
+
+.cta-action {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.btn-cta {
+  background: var(--ink);
+  color: #fff;
+  border: 3px solid var(--ink);
+  padding: 1.1rem 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.3);
+  transition: transform 0.1s, box-shadow 0.1s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-cta:hover {
+  transform: translate(-3px,-3px);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.3);
+}
+
+.cta-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(10,10,10,0.6);
+}
+
+/* FOOTER */
+footer {
+  background: var(--ink);
+  padding: 2.5rem;
+}
+
+.footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.footer-logo span { color: var(--red); }
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.footer-links a {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.footer-links a:hover { color: #fff; }
+
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.05em;
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE WIPE -->
+<div id="page-wipe"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Ai<span>.</span>Solutions</div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <button class="nav-cta">Get Started</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-label">Est. 2016 - Enterprise AI Systems</div>
+    <h1 class="hero-headline">
+      <div class="line-1" id="hero-line1">We Build AI</div>
+      <div class="line-2" id="hero-line2">That Actually <span class="accent" id="hero-line3">Works.</span></div>
+    </h1>
+    <div class="hero-bottom">
+      <p class="hero-sub">
+        <strong>No hype. No demos. Just production-grade AI systems</strong> delivering real business outcomes. From strategy to deployment - we build what others only promise.
+      </p>
+      <div class="hero-actions">
+        <a href="#work" class="btn-primary">See Our Work</a>
+        <a href="#cta" class="btn-secondary">Talk to Us</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-belt">
+  <div class="ticker-track">
+    <span class="ticker-inner">AI SOLUTIONS <span class="dot">x</span> ENTERPRISE AI <span class="dot">x</span> DATA INTELLIGENCE <span class="dot">x</span> AUTOMATION <span class="dot">x</span> ML ENGINEERING <span class="dot">x</span> RESULTS <span class="dot">x</span> AI SOLUTIONS <span class="dot">x</span> ENTERPRISE AI <span class="dot">x</span> DATA INTELLIGENCE <span class="dot">x</span> AUTOMATION <span class="dot">x</span> ML ENGINEERING <span class="dot">x</span> RESULTS <span class="dot">x</span></span>
+    <span class="ticker-inner" aria-hidden="true">AI SOLUTIONS <span class="dot">x</span> ENTERPRISE AI <span class="dot">x</span> DATA INTELLIGENCE <span class="dot">x</span> AUTOMATION <span class="dot">x</span> ML ENGINEERING <span class="dot">x</span> RESULTS <span class="dot">x</span> AI SOLUTIONS <span class="dot">x</span> ENTERPRISE AI <span class="dot">x</span> DATA INTELLIGENCE <span class="dot">x</span> AUTOMATION <span class="dot">x</span> ML ENGINEERING <span class="dot">x</span> RESULTS <span class="dot">x</span></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-header">
+    <span class="section-label">// 01 - What We Do</span>
+    <h2 class="section-title">Our Services</h2>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-num">01 /</div>
+      <div class="service-icon">◈</div>
+      <div class="service-name">AI Strategy</div>
+      <p class="service-desc">Cut through the noise. We map the AI opportunity within your business and build a roadmap that delivers measurable ROI - not a PowerPoint.</p>
+      <span class="service-tag">Advisory</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">02 /</div>
+      <div class="service-icon">⬡</div>
+      <div class="service-name">ML Engineering</div>
+      <p class="service-desc">Production-ready models. From data pipelines to model serving at scale - built to survive contact with real traffic and real data.</p>
+      <span class="service-tag">Engineering</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">03 /</div>
+      <div class="service-icon">▣</div>
+      <div class="service-name">Data Systems</div>
+      <p class="service-desc">Your AI is only as good as your data. We architect data infrastructure that makes machine learning actually work in your environment.</p>
+      <span class="service-tag">Infrastructure</span>
+    </div>
+    <div class="service-card">
+      <div class="service-num">04 /</div>
+      <div class="service-icon">⟁</div>
+      <div class="service-name">Automation</div>
+      <p class="service-desc">Eliminate the busywork. Intelligent process automation that integrates with what you have and scales with what you need.</p>
+      <span class="service-tag">Operations</span>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section id="impact">
+  <div class="impact-inner">
+    <div class="impact-title">// 02 - Impact By Numbers</div>
+    <div class="numbers-grid">
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="200">0</span><span class="suffix">+</span></div>
+        <div class="number-label">Projects Delivered</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val">$<span class="counter" data-target="2">0</span><span class="suffix">B+</span></div>
+        <div class="number-label">Value Created</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="8">0</span><span class="suffix">Yr</span></div>
+        <div class="number-label">In Production AI</div>
+      </div>
+      <div class="number-item">
+        <div class="number-val"><span class="counter" data-target="50">0</span><span class="suffix">+</span></div>
+        <div class="number-label">Enterprise Clients</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK GRID -->
+<section id="work">
+  <div class="section-header">
+    <span class="section-label">// 03 - Selected Work</span>
+    <h2 class="section-title">What We've Built</h2>
+  </div>
+  <div class="work-grid">
+    <div class="work-card work-card--large">
+      <div class="work-cat">Healthcare</div>
+      <div class="work-name">Patient Risk Prediction System</div>
+      <p class="work-desc">Deployed across 14 hospitals. Early warning system for patient deterioration with 91% recall. Reduced ICU readmissions by 34%.</p>
+      <span class="work-tag">ML / Clinical AI</span>
+      <div class="work-arrow">→</div>
+    </div>
+    <div class="work-card">
+      <div class="work-cat">Finance</div>
+      <div class="work-name">Fraud Detection Engine</div>
+      <p class="work-desc">Real-time transaction scoring at 50k TPS. 99.2% precision, $280M fraud prevented annually.</p>
+      <span class="work-tag">Real-Time ML</span>
+      <div class="work-arrow">→</div>
+    </div>
+    <div class="work-card">
+      <div class="work-cat">Retail</div>
+      <div class="work-name">Demand Forecasting Platform</div>
+      <p class="work-desc">Reduced overstock by 28% across 3,000 SKUs for a top-10 Indian retailer. MAPE under 8%.</p>
+      <span class="work-tag">Forecasting</span>
+      <div class="work-arrow">→</div>
+    </div>
+    <div class="work-card" style="grid-column: span 2;">
+      <div class="work-cat">Logistics</div>
+      <div class="work-name">Route Optimization AI</div>
+      <p class="work-desc">Fleet-wide intelligent routing for a 4,000-vehicle logistics network. 19% reduction in fuel costs. Live in 6 cities.</p>
+      <span class="work-tag">Optimization / Operations</span>
+      <div class="work-arrow">→</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section id="about">
+  <div class="about-inner">
+    <h2 class="about-headline">Built by engineers.<br>For the <span class="red">real world.</span></h2>
+    <div class="about-body">
+      <p class="about-para">
+        We are a team of machine learning engineers, data scientists, and systems architects who have spent 8 years building AI that ships. Not experiments, not proofs of concept - production systems that run in hospitals, banks, and supply chains every day. We don't pitch decks. We write code.
+      </p>
+      <div class="about-stats">
+        <div class="about-stat"><strong>New Delhi, India</strong> Headquarters</div>
+        <div class="about-stat"><strong>Remote-First</strong> Global delivery</div>
+        <div class="about-stat"><strong>ISO 27001</strong> Security certified</div>
+        <div class="about-stat"><strong>aisolutions.in</strong> Contact us</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <h2 class="cta-headline">Let's Build<br>Something<br>Real.</h2>
+    <div class="cta-action">
+      <a href="mailto:hello@aisolutions.in" class="btn-cta">Start a Project</a>
+      <span class="cta-note">Response within 24 hours. No sales calls.</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Ai<span>.</span>Solutions</div>
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:hello@aisolutions.in">Contact</a></li>
+    </ul>
+    <div class="footer-copy">c 2024 Ai Solutions. aisolutions.in</div>
+  </div>
+</footer>
+
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+// PAGE LOAD WIPE
+const wipeTimeline = gsap.timeline();
+wipeTimeline
+  .to('#page-wipe', { scaleY: 0, duration: 0.6, ease: 'expo.inOut', transformOrigin: 'top' })
+  .set('#page-wipe', { display: 'none' })
+  .from('nav', { y: -80, duration: 0.4, ease: 'expo.out' }, '-=0.1')
+  .add(() => startHeroScramble(), '-=0.2');
+
+// HERO TEXT SCRAMBLE
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*';
+
+function scrambleText(el, finalText, duration, delay) {
+  const totalFrames = Math.floor(duration * 60);
+  const resolveAt = Math.floor(totalFrames * 0.6);
+  let frame = 0;
+  const result = finalText.split('');
+
+  const tick = () => {
+    if (frame > totalFrames) {
+      el.textContent = finalText;
+      return;
+    }
+    const progress = frame / totalFrames;
+    const resolvedCount = frame > resolveAt
+      ? Math.floor(((frame - resolveAt) / (totalFrames - resolveAt)) * finalText.length)
+      : 0;
+
+    el.textContent = result.map((ch, i) => {
+      if (ch === ' ') return ' ';
+      if (i < resolvedCount) return ch;
+      return chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+
+    frame++;
+    requestAnimationFrame(tick);
+  };
+
+  setTimeout(tick, delay);
+}
+
+function startHeroScramble() {
+  // stagger the three parts of the headline
+  const line1 = document.getElementById('hero-line1');
+  const line2 = document.querySelector('#hero-line2');
+  // scramble the full headline text across the elements
+  scrambleText(line1, 'We Build AI', 1.2, 0);
+
+  // line2 contains a child span - rebuild approach
+  const line2Text = 'That Actually ';
+  const line3 = document.getElementById('hero-line3');
+  const tempSpan = document.createElement('span');
+  tempSpan.id = 'hero-line3';
+  tempSpan.className = 'accent';
+
+  let frame2 = 0;
+  const frames2 = 80;
+  const resolve2At = 48;
+
+  const tick2 = () => {
+    if (frame2 > frames2) {
+      // restore proper DOM
+      line2.innerHTML = '';
+      const textNode = document.createTextNode('That Actually ');
+      const accentSpan = document.createElement('span');
+      accentSpan.className = 'accent';
+      accentSpan.id = 'hero-line3';
+      accentSpan.textContent = 'Works.';
+      line2.appendChild(textNode);
+      line2.appendChild(accentSpan);
+      return;
+    }
+    const resolvedCount2 = frame2 > resolve2At
+      ? Math.floor(((frame2 - resolve2At) / (frames2 - resolve2At)) * line2Text.length)
+      : 0;
+    const scrambled2 = line2Text.split('').map((ch, i) => {
+      if (ch === ' ') return ' ';
+      if (i < resolvedCount2) return ch;
+      return chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+
+    // works word
+    const worksProgress = frame2 > resolve2At + 10
+      ? Math.floor(((frame2 - resolve2At - 10) / (frames2 - resolve2At - 10)) * 6)
+      : 0;
+    const worksScrambled = 'Works.'.split('').map((ch, i) => {
+      if (i < worksProgress) return ch;
+      return chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+
+    line2.innerHTML = scrambled2 + '<span class="accent" id="hero-line3">' + worksScrambled + '</span>';
+    frame2++;
+    requestAnimationFrame(tick2);
+  };
+
+  setTimeout(tick2, 300);
+
+  // Fade in hero sub and buttons
+  gsap.from('.hero-label', { y: 20, opacity: 0, duration: 0.5, ease: 'power4.out', delay: 0.8 });
+  gsap.from('.hero-bottom', { y: 30, opacity: 0, duration: 0.5, ease: 'power4.out', delay: 1.1 });
+  gsap.from('.hero-scroll-hint', { opacity: 0, duration: 0.4, delay: 1.5 });
+}
+
+// SERVICES REVEAL
+gsap.from('.service-card', {
+  x: -40,
+  opacity: 0,
+  duration: 0.3,
+  stagger: 0.05,
+  ease: 'power4.out',
+  scrollTrigger: {
+    trigger: '#services',
+    start: 'top 75%',
+  }
+});
+
+gsap.from('.section-header', {
+  y: 30,
+  opacity: 0,
+  duration: 0.4,
+  ease: 'power4.out',
+  scrollTrigger: { trigger: '#services', start: 'top 80%' }
+});
+
+// NUMBERS COUNT UP
+const counters = document.querySelectorAll('.counter');
+counters.forEach(counter => {
+  const target = parseInt(counter.dataset.target);
+  ScrollTrigger.create({
+    trigger: '#impact',
+    start: 'top 70%',
+    once: true,
+    onEnter: () => {
+      gsap.to(counter, {
+        innerHTML: target,
+        duration: 1.2,
+        ease: 'steps(20)',
+        snap: { innerHTML: 1 },
+        onUpdate() { counter.textContent = Math.round(parseFloat(counter.textContent)); }
+      });
+    }
+  });
+});
+
+// NUMBER PARALLAX
+gsap.to('.number-item:nth-child(1) .number-val', {
+  y: -30,
+  scrollTrigger: { trigger: '#impact', start: 'top bottom', end: 'bottom top', scrub: true }
+});
+gsap.to('.number-item:nth-child(3) .number-val', {
+  y: -50,
+  scrollTrigger: { trigger: '#impact', start: 'top bottom', end: 'bottom top', scrub: true }
+});
+
+// WORK CARDS REVEAL
+gsap.from('.work-card', {
+  rotation: 2,
+  opacity: 0,
+  y: 40,
+  duration: 0.4,
+  stagger: 0.08,
+  ease: 'power4.out',
+  scrollTrigger: {
+    trigger: '#work',
+    start: 'top 75%',
+  }
+});
+
+// ABOUT
+gsap.from('.about-headline', {
+  y: 50,
+  opacity: 0,
+  duration: 0.5,
+  ease: 'power4.out',
+  scrollTrigger: { trigger: '#about', start: 'top 75%' }
+});
+
+gsap.from('.about-body', {
+  y: 30,
+  opacity: 0,
+  duration: 0.5,
+  ease: 'power4.out',
+  delay: 0.15,
+  scrollTrigger: { trigger: '#about', start: 'top 70%' }
+});
+
+// CTA
+gsap.from('.cta-headline', {
+  x: -60,
+  opacity: 0,
+  duration: 0.5,
+  ease: 'expo.out',
+  scrollTrigger: { trigger: '#cta', start: 'top 75%' }
+});
+
+gsap.from('.cta-action', {
+  x: 60,
+  opacity: 0,
+  duration: 0.5,
+  ease: 'expo.out',
+  scrollTrigger: { trigger: '#cta', start: 'top 75%' }
+});
+</script>
+</body>
+</html>
