@@ -3,21 +3,65 @@
 import dynamic from "next/dynamic";
 import { WhoWeAre } from "@/components/sections/who-we-are";
 import { Capabilities } from "@/components/sections/capabilities";
-import { AutomationJourney } from "@/components/sections/automation-journey";
-import { Industries } from "@/components/sections/industries";
-import { FeaturedSolutions } from "@/components/sections/featured-solutions";
-import { EnterpriseBenefits } from "@/components/sections/enterprise-benefits";
-import { WhyAiSolutions } from "@/components/sections/why-ai-solutions";
-import { ImplementationProcess } from "@/components/sections/implementation-process";
-import { TechnologyStack } from "@/components/sections/technology-stack";
-import { CaseStudies } from "@/components/sections/case-studies";
-import { Testimonials } from "@/components/sections/testimonials";
-import { FAQ } from "@/components/sections/faq";
-import { Contact } from "@/components/sections/contact";
 
 const Hero = dynamic(
   () => import("@/components/sections/hero").then((mod) => mod.Hero),
   { ssr: false }
+);
+
+const AutomationJourney = dynamic(
+  () => import("@/components/sections/automation-journey").then((mod) => mod.AutomationJourney),
+  { ssr: true }
+);
+
+const Industries = dynamic(
+  () => import("@/components/sections/industries").then((mod) => mod.Industries),
+  { ssr: true }
+);
+
+const FeaturedSolutions = dynamic(
+  () => import("@/components/sections/featured-solutions").then((mod) => mod.FeaturedSolutions),
+  { ssr: true }
+);
+
+const EnterpriseBenefits = dynamic(
+  () => import("@/components/sections/enterprise-benefits").then((mod) => mod.EnterpriseBenefits),
+  { ssr: true }
+);
+
+const WhyAiSolutions = dynamic(
+  () => import("@/components/sections/why-ai-solutions").then((mod) => mod.WhyAiSolutions),
+  { ssr: true }
+);
+
+const ImplementationProcess = dynamic(
+  () => import("@/components/sections/implementation-process").then((mod) => mod.ImplementationProcess),
+  { ssr: true }
+);
+
+const TechnologyStack = dynamic(
+  () => import("@/components/sections/technology-stack").then((mod) => mod.TechnologyStack),
+  { ssr: true }
+);
+
+const CaseStudies = dynamic(
+  () => import("@/components/sections/case-studies").then((mod) => mod.CaseStudies),
+  { ssr: true }
+);
+
+const Testimonials = dynamic(
+  () => import("@/components/sections/testimonials").then((mod) => mod.Testimonials),
+  { ssr: true }
+);
+
+const FAQ = dynamic(
+  () => import("@/components/sections/faq").then((mod) => mod.FAQ),
+  { ssr: true }
+);
+
+const Contact = dynamic(
+  () => import("@/components/sections/contact").then((mod) => mod.Contact),
+  { ssr: true }
 );
 
 function Ticker() {
