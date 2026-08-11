@@ -43,7 +43,20 @@ if (-not $appUuid) {
     exit 1
 }
 
-$headers = @{ 'Authorization' = "Bearer $token"; 'Accept' = 'application/json' }
+$headers    = @{ 'Authorization' = "Bearer $token"; 'Accept' = 'application/json' }
+$jsonHeaders = $headers + @{ 'Content-Type' = 'application/json' }
+
+# Stamp SOURCE_COMMIT with the current HEAD SHA so the build bakes the right value
+$sha = git rev-parse HEAD 2>$null
+if ($sha) {
+    Write-Host "Stamping SOURCE_COMMIT=$($sha.Substring(0,7))..." -ForegroundColor DarkCyan
+    $body = @{ key = 'SOURCE_COMMIT'; value = $sha; is_buildtime = $true; is_runtime = $false } | ConvertTo-Json
+    try {
+        Invoke-RestMethod -Method Patch -Uri "$base/api/v1/applications/$appUuid/envs" -Headers $jsonHeaders -Body $body | Out-Null
+    } catch {
+        Write-Host "  Warning: could not patch SOURCE_COMMIT: $($_.Exception.Message)" -ForegroundColor Yellow
+    }
+}
 
 Write-Host "Triggering deploy for $appUuid (force=$Force)..." -ForegroundColor Cyan
 
