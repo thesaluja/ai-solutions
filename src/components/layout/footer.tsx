@@ -81,9 +81,23 @@ export function Footer() {
           <p className="font-mono text-[0.65rem] text-[rgba(240,240,255,0.2)] uppercase tracking-widest">
             &copy; {new Date().getFullYear()} {SITE.name}. All rights reserved.
           </p>
-          <p className="font-mono text-[0.65rem] text-[rgba(240,240,255,0.2)] uppercase tracking-widest">
-            {SITE.location}
-          </p>
+          <div className="flex items-center gap-6">
+            <Link
+              href="/privacy-policy"
+              className="font-mono text-[0.65rem] text-[rgba(240,240,255,0.2)] uppercase tracking-widest hover:text-[#00F5FF] transition-colors"
+            >
+              Privacy Policy
+            </Link>
+            <Link
+              href="/terms"
+              className="font-mono text-[0.65rem] text-[rgba(240,240,255,0.2)] uppercase tracking-widest hover:text-[#00F5FF] transition-colors"
+            >
+              Terms
+            </Link>
+            <p className="font-mono text-[0.65rem] text-[rgba(240,240,255,0.2)] uppercase tracking-widest">
+              {SITE.location}
+            </p>
+          </div>
         </div>
       </div>
     </footer>
