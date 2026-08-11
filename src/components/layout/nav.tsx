@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { useTheme } from "next-themes";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useScrollSpy, useReducedMotion } from "@/hooks";
 import { NAV_ITEMS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -16,12 +15,6 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const activeId = useScrollSpy(sectionIds, 120);
   const prefersReduced = useReducedMotion();
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,15 +70,6 @@ export function Nav() {
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            {mounted && (
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="border border-[#00F5FF]/30 hover:border-[#00F5FF] p-2 text-[rgba(240,240,255,0.5)] hover:text-[#00F5FF] transition-all"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-              </button>
-            )}
             <button
               className="font-mono text-[0.75rem] uppercase tracking-widest text-[#00F5FF] bg-transparent border-2 border-[#00F5FF] shadow-[3px_3px_0_#00F5FF] px-5 py-2 hover:border-[#BF00FF] hover:shadow-[3px_3px_0_#BF00FF] hover:text-[#BF00FF] transition-all duration-150 cursor-pointer"
               onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}

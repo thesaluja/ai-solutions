@@ -41,7 +41,7 @@ export function CommandPalette() {
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
         onClick={() => setOpen(false)}
       />
-      <div className="relative w-full max-w-lg mx-4 bg-card border border-border rounded-2xl shadow-2xl overflow-hidden">
+      <div className="relative w-full max-w-lg mx-4 bg-card border border-border shadow-2xl overflow-hidden">
         <div className="flex items-center gap-3 px-4 border-b border-border">
           <Command className="h-4 w-4 text-muted-foreground shrink-0" />
           <input
@@ -52,7 +52,7 @@ export function CommandPalette() {
             className="flex-1 h-12 bg-transparent text-sm text-foreground placeholder:text-muted-foreground outline-none"
             autoFocus
           />
-          <kbd className="text-xs text-muted-foreground bg-white/5 px-2 py-0.5 rounded">
+          <kbd className="text-xs text-muted-foreground bg-white/5 px-2 py-0.5">
             ESC
           </kbd>
         </div>
@@ -62,7 +62,7 @@ export function CommandPalette() {
               key={item.href}
               onClick={() => navigate(item.href)}
               className={cn(
-                "w-full text-left px-4 py-2.5 rounded-lg text-sm transition-colors",
+                "w-full text-left px-4 py-2.5 text-sm transition-colors",
                 "text-muted-foreground hover:text-foreground hover:bg-white/5"
               )}
             >

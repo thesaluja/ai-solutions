@@ -88,16 +88,7 @@ export function Hero() {
         className="relative min-h-screen flex items-center overflow-hidden pt-16"
       >
         {/* Grid background */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(0,245,255,0.04) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(0,245,255,0.04) 1px, transparent 1px)
-            `,
-            backgroundSize: "60px 60px",
-          }}
-        />
+        <div className="absolute inset-0 pointer-events-none grid-bg" />
 
         {/* Subtle glow orbs */}
         <div className="absolute pointer-events-none top-[20%] left-[60%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(191,0,255,0.08)_0%,transparent_70%)] blur-[40px]" />
