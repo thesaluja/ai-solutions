@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import { Send, CheckCircle, Mail, MapPin } from "lucide-react";
+import { Send, CheckCircle, Mail, MapPin, Phone } from "lucide-react";
 import { SectionReveal, BlurReveal } from "@/components/motion";
 import { Button, Input, Textarea } from "@/components/ui";
 import { SITE } from "@/lib/constants";
@@ -36,7 +36,7 @@ export function Contact() {
   const onSubmit = (data: FormValues) => {
     const subject = encodeURIComponent(`Project inquiry${data.company ? ` from ${data.company}` : ""}`);
     const body = encodeURIComponent(`Name: ${data.name}\nCompany: ${data.company ?? "—"}\n\n${data.message}`);
-    window.location.href = `mailto:hey@aisolutions.in?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
     setSubmitted(true);
     setTimeout(() => {
       setSubmitted(false);
@@ -82,6 +82,20 @@ export function Contact() {
                 <div>
                   <p className="text-sm font-medium text-foreground">Location</p>
                   <p className="text-sm text-muted-foreground">{SITE.location}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Phone className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground">Phone / WhatsApp</p>
+                  <a
+                    href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {SITE.phone}
+                  </a>
                 </div>
               </div>
             </div>

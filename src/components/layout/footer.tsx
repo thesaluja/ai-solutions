@@ -71,26 +71,6 @@ export function Footer() {
                   Email <ArrowUpRight className="h-3 w-3" />
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs text-[rgba(240,240,255,0.4)] hover:text-[#00F5FF] uppercase tracking-wide transition-colors inline-flex items-center gap-1"
-                >
-                  LinkedIn <ArrowUpRight className="h-3 w-3" />
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://twitter.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-mono text-xs text-[rgba(240,240,255,0.4)] hover:text-[#00F5FF] uppercase tracking-wide transition-colors inline-flex items-center gap-1"
-                >
-                  Twitter <ArrowUpRight className="h-3 w-3" />
-                </a>
-              </li>
             </ul>
           </div>
         </div>

@@ -7,6 +7,7 @@ export const SITE = {
   description:
     "Ai Solutions designs and deploys enterprise-grade artificial intelligence systems that automate complex business processes, reduce operational costs, and unlock new revenue streams.",
   email: "hey@aisolutions.in",
+  phone: "8989895123",
   location: "Bangalore, India",
 } as const;
 
@@ -112,21 +113,21 @@ export const TESTIMONIALS: Testimonial[] = [
       "Ai Solutions didn't just deliver a model. They redesigned our entire loan origination process around what AI could do. The results exceeded every projection we had.",
     author: "Priya Sharma",
     role: "CTO",
-    company: "Fortune 500 Bank",
+    company: "Private Sector Bank, India",
   },
   {
     quote:
       "We evaluated six firms before selecting Ai Solutions. Their technical depth, enterprise maturity, and refusal to overpromise set them apart. Eighteen months later, we're still impressed.",
     author: "Rajesh Krishnan",
     role: "VP of Engineering",
-    company: "Global Manufacturing Corp",
+    company: "Multinational Manufacturer, 17 Plants",
   },
   {
     quote:
       "The AI agents they built handle 60% of our customer service volume now. Our team focuses on complex cases that actually need human judgment. CSAT went up while costs went down.",
     author: "Ananya Patel",
     role: "Head of Digital",
-    company: "E-commerce Platform",
+    company: "Series C E-commerce, 5M+ Users",
   },
 ];
 

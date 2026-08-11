@@ -100,16 +100,15 @@ export function Hero() {
           {/* Headline - scramble target */}
           <h1
             ref={headlineRef}
-            data-final={"WE BUILD AI\nTHAT ACTUALLY\nGLOWS."}
+            data-final={"ENTERPRISE AI\nENGINEERED TO\nPERFORM."}
             className="font-display font-black leading-[0.9] tracking-tight mb-8 text-[#F0F0FF] text-[clamp(3.5rem,9vw,8.5rem)] whitespace-pre-line"
           >
-            {"WE BUILD AI\nTHAT ACTUALLY\nGLOWS."}
+            {"ENTERPRISE AI\nENGINEERED TO\nPERFORM."}
           </h1>
 
           {/* Sub */}
           <FadeIn delay={0.8} className="font-sans text-[1.05rem] text-[rgba(240,240,255,0.55)] max-w-[500px] leading-relaxed mb-10">
-            Production-grade AI systems with the precision of engineering and the boldness of vision.
-            No demos. Just results.
+            We design, build, and deploy AI systems that run in production - at enterprise scale, with measurable outcomes.
           </FadeIn>
 
           {/* CTAs */}

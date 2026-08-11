@@ -9,7 +9,7 @@ const stats = [
   { value: 50, suffix: "+", label: "Enterprise Deployments" },
   { value: 98, suffix: "%", label: "Client Retention" },
   { value: 6, suffix: "", label: "Years of AI Engineering" },
-  { value: 200, suffix: "+", label: "AI Systems Built" },
+  { value: 200, suffix: "+", label: "Production Models Deployed" },
 ];
 
 const principles = [
