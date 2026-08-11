@@ -3,12 +3,11 @@
 
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
 function NeuralNodes() {
   const groupRef = useRef<THREE.Group>(null);
-  const count = 200;
+  const count = 80;
   const radius = 4;
 
   const positions = useMemo(() => {
@@ -39,16 +38,14 @@ function NeuralNodes() {
         const y = positions[i * 3 + 1];
         const z = positions[i * 3 + 2];
         return (
-          <Float key={i} speed={1 + Math.random() * 2} floatIntensity={0.3}>
-            <mesh position={[x, y, z]}>
-              <sphereGeometry args={[nodeSize, 8, 8]} />
-              <meshBasicMaterial
-                color={new THREE.Color().setHSL(0.58 + Math.random() * 0.08, 0.8, 0.6)}
-                transparent
-                opacity={0.6 + Math.random() * 0.4}
-              />
-            </mesh>
-          </Float>
+          <mesh key={i} position={[x, y, z]}>
+            <sphereGeometry args={[nodeSize, 4, 4]} />
+            <meshBasicMaterial
+              color={new THREE.Color().setHSL(0.58 + Math.random() * 0.08, 0.8, 0.6)}
+              transparent
+              opacity={0.6 + Math.random() * 0.4}
+            />
+          </mesh>
         );
       })}
     </group>
@@ -57,7 +54,7 @@ function NeuralNodes() {
 
 function Connections() {
   const linesRef = useRef<THREE.Group>(null);
-  const connectionCount = 80;
+  const connectionCount = 40;
 
   const lines = useMemo(() => {
     const result: { start: THREE.Vector3; end: THREE.Vector3 }[] = [];
@@ -126,7 +123,7 @@ function Connections() {
 
 function ParticleField() {
   const ref = useRef<THREE.Points>(null);
-  const count = 500;
+  const count = 200;
 
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -182,7 +179,7 @@ export function NeuralNetwork() {
       <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background z-10" />
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
-        dpr={[1, 1.5]}
+        dpr={[1, 1]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
       >
@@ -190,7 +187,6 @@ export function NeuralNetwork() {
         <NeuralNodes />
         <Connections />
         <ParticleField />
-        <Environment preset="city" />
       </Canvas>
     </div>
   );
