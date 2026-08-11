@@ -11,12 +11,21 @@ export interface ServiceItem {
 
 export interface CaseStudy {
   title: string;
+  slug: string;
   industry: string;
   challenge: string;
   solution: string;
   results: string[];
   metric: string;
   metricLabel: string;
+  fullContent: {
+    overview: string;
+    approach: string;
+    architecture: string;
+    stack: string[];
+    timeline: string;
+    outcome: string;
+  };
 }
 
 export interface Testimonial {

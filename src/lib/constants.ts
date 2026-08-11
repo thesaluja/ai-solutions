@@ -62,6 +62,7 @@ export const SERVICES: ServiceItem[] = [
 export const CASE_STUDIES: CaseStudy[] = [
   {
     title: "Automated Underwriting Engine",
+    slug: "automated-underwriting-engine",
     industry: "Insurance",
     challenge:
       "A mid-market insurer processed 12,000 applications monthly with a 14-day average turnaround. Manual underwriting created bottlenecks and inconsistent risk assessment.",
@@ -74,9 +75,23 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     metric: "94%",
     metricLabel: "faster processing",
+    fullContent: {
+      overview:
+        "A mid-market insurer was drowning in paper. 12,000 applications per month, 14-day turnaround, and underwriters spending 60% of their time on data entry rather than risk judgment. The operations team knew automation was the answer; every prior attempt had failed because it tried to replace the underwriter instead of removing the busywork.",
+      approach:
+        "We started with a two-week discovery sprint embedded with the underwriting team. The core insight: 64% of applications were straightforward enough for fully automated decisions, but the existing system could not identify which ones. We rebuilt the workflow so the model triaged first, then routed only the genuinely complex cases to humans with structured recommendations attached.",
+      architecture:
+        "Three-layer system: (1) NLP document extraction pipeline using a fine-tuned BERT variant for insurance-specific entities; (2) gradient-boosted risk scoring model trained on 5 years of claims data with calibrated probability outputs; (3) LLM-powered recommendation engine that generates structured summaries for the 36% of cases requiring human review. Every model call is logged with feature inputs and outcomes for audit.",
+      stack: ["Python", "PyTorch", "FastAPI", "PostgreSQL", "AWS SageMaker", "Kubernetes"],
+      timeline:
+        "18 weeks from kickoff to production. Weeks 1-4: data audit and model baseline. Weeks 5-10: pipeline development. Weeks 11-14: integration and UAT. Weeks 15-18: phased rollout.",
+      outcome:
+        "Six months post-launch: straight-through processing rate at 64%, average turnaround 4 hours, zero compliance incidents, underwriter satisfaction scores up 40%. The underwriter team was redeployed to specialty lines where their judgment actually moved the needle.",
+    },
   },
   {
     title: "Supply Chain Forecasting",
+    slug: "supply-chain-forecasting",
     industry: "Manufacturing",
     challenge:
       "A manufacturer with 17 plants across 8 countries faced $42M in annual waste from demand-supply mismatches. Spreadsheet-based forecasting couldn't handle 14,000 SKUs with seasonal patterns.",
@@ -89,9 +104,23 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     metric: "$18M",
     metricLabel: "annual waste reduction",
+    fullContent: {
+      overview:
+        "A multinational manufacturer with 17 plants across 8 countries was bleeding $42M per year to demand-supply mismatches. The forecasting team ran 14,000 SKUs through a patchwork of spreadsheets and regional tools, none of which could reason about cross-plant dependencies or seasonal demand shifts. Stockouts triggered rush production; over-forecasts sat in warehouses for months.",
+      approach:
+        "We replaced the spreadsheet layer with a hierarchical forecasting system that reasoned across plants, SKUs, and time horizons simultaneously. The critical design decision was treating the supply chain as a single optimization problem rather than 17 independent ones. We started with the top 200 SKUs (which drove 60% of waste) and expanded once the model was trusted.",
+      architecture:
+        "Transformer-based hierarchical time-series model with plant and SKU embeddings learned from 4 years of historical demand. Probabilistic outputs feed an inventory optimization layer that solves a multi-echelon replenishment problem. Outputs are pushed to the ERP every 4 hours via a streaming pipeline; planners see ranked recommendations with confidence intervals and override UI for exceptions.",
+      stack: ["Python", "PyTorch", "Prophet", "Snowflake", "Kafka", "Kubernetes", "AWS"],
+      timeline:
+        "22 weeks end-to-end. Weeks 1-6: data harmonization across 17 plants (the hardest phase). Weeks 7-12: model development and backtesting. Weeks 13-18: ERP integration and planner UI. Weeks 19-22: phased rollout plant by plant, with parallel running.",
+      outcome:
+        "After 12 months in production: $18M reduction in waste, 71% fewer stockout incidents, 34% lower inventory holding costs. Forecast accuracy improved 41% over the previous baseline. The planning team shifted from producing numbers to managing exceptions.",
+    },
   },
   {
     title: "Intelligent Document Processing",
+    slug: "intelligent-document-processing",
     industry: "Financial Services",
     challenge:
       "A bank processed 50,000+ documents daily across loan applications, KYC, and compliance. 200+ staff performed manual data entry with a 3.2% error rate and 48-hour SLA.",
@@ -104,6 +133,19 @@ export const CASE_STUDIES: CaseStudy[] = [
     ],
     metric: "87%",
     metricLabel: "reduction in manual work",
+    fullContent: {
+      overview:
+        "A retail bank processed 50,000+ documents per day across loan applications, KYC onboarding, and compliance reviews. 200+ staff handled the intake, classification, and data entry manually. The error rate sat at 3.2%, the SLA was 48 hours, and staff turnover was a constant drag on quality. Compliance teams flagged growing audit risk with regulators.",
+      approach:
+        "We treated this as a multi-stage problem rather than a single OCR task. Classification came first (which document type, which workflow), then extraction (fields and entities), then validation (cross-checks against authoritative sources), then routing. Every correction made by a human in the validation UI was captured as training signal and fed back into the models weekly.",
+      architecture:
+        "Document classification with a vision transformer fine-tuned on the bank's own document corpus. Field extraction via a hybrid NER + layout-aware model. Validation layer with deterministic business rules plus an LLM judge for ambiguous cases. Human-in-the-loop correction UI with active learning. All processing happens inside the bank's VPC; no document data leaves the perimeter.",
+      stack: ["Python", "PyTorch", "Transformers", "FastAPI", "PostgreSQL", "MLflow", "Kubernetes"],
+      timeline:
+        "26 weeks across three phases. Phase 1 (weeks 1-8): classification and extraction for the top 5 document types. Phase 2 (weeks 9-18): expansion to 25 document types plus validation layer. Phase 3 (weeks 19-26): active learning loop, compliance reporting, and decommissioning of legacy intake queues.",
+      outcome:
+        "After 9 months: 87% reduction in manual processing effort, error rate down to 0.4%, SLA under 2 minutes for 92% of documents. The team of 200 was redeployed to exception handling and customer-facing advisory work. Regulator audit found zero material issues with the automated pipeline.",
+    },
   },
 ];
 

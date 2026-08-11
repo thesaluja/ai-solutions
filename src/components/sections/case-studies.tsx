@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { SectionReveal, BlurReveal, FadeIn } from "@/components/motion";
 import { Card, CardContent, Badge } from "@/components/ui";
@@ -73,12 +74,12 @@ export function CaseStudies() {
                       <p className="mt-2 text-sm text-muted-foreground text-center">
                         {study.metricLabel}
                       </p>
-                      <a
-                        href={`mailto:hey@aisolutions.in?subject=${encodeURIComponent(`Case study request: ${study.title}`)}`}
+                      <Link
+                        href={`/case-studies/${study.slug}`}
                         className="mt-6 flex items-center gap-2 text-sm text-[#00F5FF] group-hover:underline"
                       >
-                        Request full case study <ArrowUpRight className="h-3.5 w-3.5" />
-                      </a>
+                        Read full case study <ArrowUpRight className="h-3.5 w-3.5" />
+                      </Link>
                     </div>
                   </div>
                 </CardContent>
