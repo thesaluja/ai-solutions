@@ -11,12 +11,10 @@ REPO_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 CREDS="$REPO_ROOT/.coolify-creds.local"
 [ -f "$CREDS" ] || exit 0
 
-# Parse key=value lines
-while IFS='=' read -r key val; do
-  [[ "$key" =~ ^# ]] && continue
-  [[ -z "$key" ]] && continue
-  export "${key// /}=${val// /}"
-done < "$CREDS"
+# Extract specific keys (handles CRLF Windows line endings)
+COOLIFY_API_TOKEN=$(grep '^COOLIFY_API_TOKEN=' "$CREDS" | head -1 | cut -d= -f2- | tr -d '\r')
+COOLIFY_APPLICATION_UUID=$(grep '^COOLIFY_APPLICATION_UUID=' "$CREDS" | head -1 | cut -d= -f2- | tr -d '\r')
+COOLIFY_BASE_URL=$(grep '^COOLIFY_BASE_URL=' "$CREDS" | head -1 | cut -d= -f2- | tr -d '\r')
 
 [ -z "$COOLIFY_API_TOKEN" ] && exit 0
 [ -z "$COOLIFY_APPLICATION_UUID" ] && exit 0
