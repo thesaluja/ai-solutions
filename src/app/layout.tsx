@@ -39,11 +39,20 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     locale: "en_IN",
     type: "website",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: `${SITE.name} - Enterprise AI Engineering`,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} | ${SITE.tagline}`,
     description: SITE.description,
+    images: ["/opengraph-image.png"],
   },
   robots: { index: true, follow: true },
 };
@@ -59,11 +68,40 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: SITE.name,
+    url: `https://${SITE.domain}`,
+    email: SITE.email,
+    telephone: SITE.phone,
+    description: SITE.description,
+    foundingDate: "2016",
+    areaServed: "Worldwide",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Bangalore",
+      addressCountry: "IN",
+    },
+    knowsAbout: [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Business Process Automation",
+      "AI Consulting",
+      "Enterprise AI Integration",
+      "Natural Language Processing",
+    ],
+  };
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${spaceGrotesk.variable} ${ibmPlexMono.variable} font-sans antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <ThemeProvider
           attribute="class"
           forcedTheme="dark"
