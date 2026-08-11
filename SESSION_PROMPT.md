@@ -8,7 +8,7 @@
 
 ## Key Facts
 
-- **Repo**: `thesaluja/ai-solutions` (main branch)
+- **Repo**: `thesaluja/ai-solutions` (master branch)
 - **Live at**: `https://aisolutions.in`
 - **Coolify UUID**: `pqm7a8asdjzvxa2ev785r3jn`
 - **Stack**: Next.js 15 + R3F + Framer Motion, no DB, no auth

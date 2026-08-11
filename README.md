@@ -62,8 +62,12 @@ docker compose up -d
 src/
 ├── app/              # Next.js App Router pages
 │   ├── api/health/   # Healthcheck endpoint
-│   ├── layout.tsx    # Root layout
+│   ├── case-studies/[slug]/   # Full case study pages
+│   ├── privacy-policy/        # Privacy policy
+│   ├── terms/                 # Terms of service
+│   ├── layout.tsx    # Root layout (with JSON-LD Organization schema)
 │   ├── page.tsx      # Home page
+│   ├── opengraph-image.tsx    # 1200x630 OG card (edge runtime)
 │   ├── loading.tsx   # Loading screen
 │   ├── not-found.tsx # 404 page
 │   ├── robots.ts     # robots.txt
@@ -78,6 +82,19 @@ src/
 ├── lib/              # Utilities, constants, metadata
 └── types/            # TypeScript types
 ```
+
+## Routes
+
+| Path | Description |
+|---|---|
+| `/` | Home (14 section components) |
+| `/case-studies/automated-underwriting-engine` | Insurance case study |
+| `/case-studies/supply-chain-forecasting` | Manufacturing case study |
+| `/case-studies/intelligent-document-processing` | Financial services case study |
+| `/privacy-policy` | Privacy policy |
+| `/terms` | Terms of service |
+| `/api/health` | Healthcheck (returns `{status, commitSha}`) |
+| `/opengraph-image.png` | Generated OG card (1200x630) |
 
 ## License
 
