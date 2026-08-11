@@ -35,8 +35,8 @@ module.exports = {
         "neon-orange": "#FF6B00",
       },
       fontFamily: {
-        sans: ["var(--font-dm-sans)", "var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-ibm-plex-mono)", "var(--font-geist-mono)", "monospace"],
+        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        mono: ["var(--font-ibm-plex-mono)", "monospace"],
         display: ["var(--font-space-grotesk)", "var(--font-manrope)", "system-ui", "sans-serif"],
       },
       borderRadius: {

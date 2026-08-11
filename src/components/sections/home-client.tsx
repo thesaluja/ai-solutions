@@ -28,41 +28,18 @@ function Ticker() {
     "AUTOMATION", "×", "ML ENGINEERING", "×", "RESULTS", "×",
   ];
   return (
-    <>
-      <style>{`@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }`}</style>
-      <div
-        style={{
-          borderTop: "2px solid #BF00FF",
-          borderBottom: "2px solid #BF00FF",
-          background: "rgba(191,0,255,0.04)",
-          overflow: "hidden",
-          padding: "0.7rem 0",
-        }}
-      >
-        <div
-          className="flex w-max"
-          style={{ animation: "marquee 28s linear infinite" }}
-        >
-          {items.map((item, i) => (
-            <span
-              key={i}
-              style={{
-                fontFamily: "var(--font-ibm-plex-mono, monospace)",
-                fontSize: "0.75rem",
-                fontWeight: 500,
-                textTransform: "uppercase",
-                letterSpacing: "0.15em",
-                color: "#BF00FF",
-                padding: "0 2.5rem",
-                whiteSpace: "nowrap",
-              }}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
+    <div className="border-t-2 border-b-2 border-violet bg-violet/4 overflow-hidden py-[0.7rem]">
+      <div className="flex w-max animate-marquee">
+        {items.map((item, i) => (
+          <span
+            key={i}
+            className="font-mono text-xs font-medium uppercase tracking-[0.15em] text-violet px-[2.5rem] whitespace-nowrap"
+          >
+            {item}
+          </span>
+        ))}
       </div>
-    </>
+    </div>
   );
 }
 
